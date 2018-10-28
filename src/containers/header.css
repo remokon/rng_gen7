@@ -1,0 +1,19 @@
+.header {
+  -webkit-app-region: drag;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+.header-item {
+  border-radius: 4px;
+  color: #e8ebe4;
+  float: left;
+  font-size: 18px;
+  line-height: 25px;
+  margin: 16px;
+  padding: 0px;
+  text-align: center;
+  text-decoration: none;
+}

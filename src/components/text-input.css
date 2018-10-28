@@ -1,0 +1,46 @@
+/* Thanks to https://scotch.io/tutorials/google-material-design-input-boxes-in-css3 */
+
+.bar {
+  display: block;
+  width: 320px;
+  position: relative;
+}
+
+.bar:before, .bar:after {
+  background: var(--bar-color); 
+  bottom: 1px; 
+  content: '';
+  height: 2px;
+  position: absolute;
+  transition: 0.2s ease all;
+  width: 0;
+}
+
+.bar:before {
+  left: 50%;
+}
+
+.bar:after {
+  right: 50%; 
+}
+
+input:focus ~ .bar:before, input:focus ~ .bar:after {
+  width: 50%;
+}
+
+.mat-label {
+  color:#FFFFFF;
+  font-size: 15px;
+  font-weight: normal;
+  left: 5px;
+  pointer-events: none;
+  position: absolute;
+  top: 10px;
+  transition: 0.2s ease all; 
+}
+
+input:focus ~ .mat-label, input:valid ~ .mat-label     {
+  color: var(--label-color);
+  font-size: 14px;
+  top: -10px;
+}
