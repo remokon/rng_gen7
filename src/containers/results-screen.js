@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { EggResult } from '../components/egg-result';
 import { StationaryResult } from '../components/stationary-result';
+import { Button, Pane, Strong, Text, TextInputField, TextInput, Checkbox, RadioGroup, Table } from 'evergreen-ui';
 
 const handleResultType = resultType => {
   switch (resultType) {
@@ -18,11 +19,67 @@ const handleResultType = resultType => {
 export const Results = ({ rngResults }) => {
   const { results, type } = rngResults;
   const resultType = handleResultType(type);
+  console.log(rngResults);
+
+  const is31 = ivNumber => {
+    if (ivNumber === 31) {
+      return (
+        <Text fontFamily="mono" fontWeight="800">
+          {ivNumber}
+        </Text>
+      );
+    }
+    return ivNumber;
+  };
 
   return (
     <div>
-      Results:
-      {map(results, resultType)}
+      <Pane
+        display="flex"
+        padding={16}
+        display="flex"
+        justifyContent="space-between"
+        flexDirection="row"
+        flexWrap="wrap"
+      >
+        <Table width="100vw">
+          <Table.Head>
+            <Table.TextHeaderCell>Frame</Table.TextHeaderCell>
+            <Table.TextHeaderCell>Adv</Table.TextHeaderCell>
+            <Table.TextHeaderCell>Nature</Table.TextHeaderCell>
+            <Table.TextHeaderCell>HP</Table.TextHeaderCell>
+            <Table.TextHeaderCell>Atk</Table.TextHeaderCell>
+            <Table.TextHeaderCell>Def</Table.TextHeaderCell>
+            <Table.TextHeaderCell>SpA</Table.TextHeaderCell>
+            <Table.TextHeaderCell>SpD</Table.TextHeaderCell>
+            <Table.TextHeaderCell>Spe</Table.TextHeaderCell>
+            <Table.TextHeaderCell>Gender</Table.TextHeaderCell>
+            <Table.TextHeaderCell>Ability</Table.TextHeaderCell>
+            <Table.TextHeaderCell>Psv</Table.TextHeaderCell>
+            <Table.TextHeaderCell>Seeds</Table.TextHeaderCell>
+          </Table.Head>
+          <Table.Body height={240}>
+            {results.map((o, i) => (
+              <Table.Row key={i} isSelectable>
+                <Table.TextCell isNumber>{o.frame}</Table.TextCell>
+                <Table.TextCell isNumber>{o.frameAdvance}</Table.TextCell>
+                <Table.TextCell isNumber>{o.egg.nature}</Table.TextCell>
+                {o.egg.ivs.map((o, i) => {
+                  return (
+                    <Table.TextCell key={i} isNumber>
+                      {is31(o)}
+                    </Table.TextCell>
+                  );
+                })}
+                <Table.TextCell isNumber>{o.egg.gender}</Table.TextCell>
+                <Table.TextCell isNumber>{o.egg.ability}</Table.TextCell>
+                <Table.TextCell isNumber>{o.egg.psv}</Table.TextCell>
+                <Table.TextCell isNumber>{o.eggSeeds.join(',')}</Table.TextCell>
+              </Table.Row>
+            ))}
+          </Table.Body>
+        </Table>
+      </Pane>
     </div>
   );
 };

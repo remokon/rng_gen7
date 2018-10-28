@@ -1,6 +1,12 @@
+.📦fnt-fam_tawojy {
+  /* font-family: 'Montserrat', sans-serif; */
+}
+
 .App {
   margin: 100px auto;
+  /* font-family: 'Montserrat', sans-serif; */
 }
+
 .header {
   -webkit-app-region: drag;
   position: fixed;
@@ -29,6 +35,7 @@
     width: 100vw;
   }
 }
+
 @media all and (min-width: 678px) {
   .fullOnMobile33 {
     width: 33.33vw;

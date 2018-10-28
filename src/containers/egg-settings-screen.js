@@ -66,6 +66,12 @@ export const EggSettings = ({ eggSettings, setSetting, setResults, setScreen, se
   };
   console.log(this.state);
 
+  const fixEggSeed = value => {
+    let fixedValue = value;
+    fixedValue = value.split(', ');
+    return fixedValue;
+  };
+
   return (
     <div>
       <Pane
@@ -80,9 +86,10 @@ export const EggSettings = ({ eggSettings, setSetting, setResults, setScreen, se
           <TextInputField
             label="Egg seeds"
             placeholder="Egg seeds"
-            onChange={seedList => saveSetting('eggSeeds')(parseSeedList(seedList))}
-            value={join(eggSeeds, ', ')}
+            onChange={e => setEggSettingProperty('eggSeeds', parseSeedList(e.target.value))}
+            value={join(eggSeeds, ', ').toUpperCase()}
             required
+            maxlength="38"
           />
         </Pane>
         <Pane margin={8}>
