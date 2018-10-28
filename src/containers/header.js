@@ -1,4 +1,4 @@
-import './header.css';
+import './style/header.css';
 import React from 'react';
 import NavBarMenuSVG from './nav-bar-menu.svg';
 import { connect } from 'react-redux';
@@ -8,20 +8,15 @@ export const HeaderBar = ({ screenTitle, setNavBar }) => {
   const headerStyle = {
     overflow: 'hidden',
     backgroundColor: '#2E68B4',
-    minWidth: '320px',
-    color: '#FFFFFF',
+    color: '#FFFFFF'
   };
 
-  return <div className="header" style={headerStyle}>
-      <img
-        src={NavBarMenuSVG}
-        className="header-item"
-        onClick={() => setNavBar(true)}
-      />
-      <a className="header-item">
-        {screenTitle}
-      </a>
-    </div>;
+  return (
+    <div className="header" style={headerStyle}>
+      <img src={NavBarMenuSVG} className="header-item" onClick={() => setNavBar(true)} />
+      <a className="header-item">{screenTitle}</a>
+    </div>
+  );
 };
 
 export const Header = connect(

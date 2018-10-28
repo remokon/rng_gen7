@@ -1,4 +1,4 @@
-import './header.css';
+import './style/header.css';
 import React from 'react';
 import { map } from 'lodash-es';
 import { connect } from 'react-redux';

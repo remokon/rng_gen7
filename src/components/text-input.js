@@ -1,4 +1,4 @@
-import './text-input.css';
+import './style/text-input.css';
 import React from 'react';
 
 export const TextInput = ({ placeholder, onChange, value }) => {
@@ -6,8 +6,7 @@ export const TextInput = ({ placeholder, onChange, value }) => {
   const searchStyle = {
     borderRadius: '1px',
     margin: '20px auto',
-    width: '320px',
-    position: 'relative',
+    position: 'relative'
   };
   const inputStyle = {
     backgroundColor: '#454545',
@@ -19,19 +18,13 @@ export const TextInput = ({ placeholder, onChange, value }) => {
     height: '40px',
     margin: '0px 0px 1px 0px',
     outline: 'none',
-    padding: '0px 0px 0px 5px',
-    width: '315px'
+    padding: '0px 0px 0px 5px'
+    // width: "315px"
   };
 
   return (
     <div style={searchStyle}>
-      <input
-        style={inputStyle}
-        type="text"
-        value={value}
-        onChange={event => onChange(event.target.value)}
-        required
-      />
+      <input style={inputStyle} type="text" value={value} onChange={event => onChange(event.target.value)} required />
       <span className="bar" style={{ '--bar-color': color }} />
       <label className="mat-label" style={{ '--label-color': color }}>
         {placeholder}

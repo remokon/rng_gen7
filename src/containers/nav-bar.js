@@ -1,4 +1,4 @@
-import './nav-bar.css';
+import './style/nav-bar.css';
 import React from 'react';
 import { connect } from 'react-redux';
 import { changeScreen, setNavBarState } from '../store/dispatchers';
