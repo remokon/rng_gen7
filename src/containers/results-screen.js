@@ -1,9 +1,10 @@
-import { map } from 'lodash-es';
+import { Pane, Table, Text } from 'evergreen-ui';
+import { join, map, reverse } from 'lodash-es';
 import React from 'react';
 import { connect } from 'react-redux';
 import { EggResult } from '../components/egg-result';
 import { StationaryResult } from '../components/stationary-result';
-import { Button, Pane, Strong, Text, TextInputField, TextInput, Checkbox, RadioGroup, Table } from 'evergreen-ui';
+import { parseHexSeed } from '../utils/parse-hex-seed';
 
 const handleResultType = resultType => {
   switch (resultType) {
@@ -56,9 +57,9 @@ export const Results = ({ rngResults }) => {
             <Table.TextHeaderCell>Gender</Table.TextHeaderCell>
             <Table.TextHeaderCell>Ability</Table.TextHeaderCell>
             <Table.TextHeaderCell>Psv</Table.TextHeaderCell>
-            <Table.TextHeaderCell>Seeds</Table.TextHeaderCell>
+            <Table.TextHeaderCell flexBasis={'314px'}>Seeds</Table.TextHeaderCell>
           </Table.Head>
-          <Table.Body height={240}>
+          <Table.Body>
             {results.map((o, i) => (
               <Table.Row key={i} isSelectable>
                 <Table.TextCell isNumber>{o.frame}</Table.TextCell>
@@ -71,10 +72,22 @@ export const Results = ({ rngResults }) => {
                     </Table.TextCell>
                   );
                 })}
-                <Table.TextCell isNumber>{o.egg.gender}</Table.TextCell>
+                <Table.TextCell isNumber>
+                  {o.egg.gender === 'Male' ? (
+                    <Text fontSize="16px" fontWeight="800">
+                      ♂
+                    </Text>
+                  ) : (
+                    <Text fontSize="16px" fontWeight="800">
+                      ♀
+                    </Text>
+                  )}
+                </Table.TextCell>
                 <Table.TextCell isNumber>{o.egg.ability}</Table.TextCell>
                 <Table.TextCell isNumber>{o.egg.psv}</Table.TextCell>
-                <Table.TextCell isNumber>{o.eggSeeds.join(',')}</Table.TextCell>
+                <Table.TextCell flexBasis={'314px'} isNumber>
+                  {join(map(reverse([...o.eggSeeds]), parseHexSeed), ', ')}
+                </Table.TextCell>
               </Table.Row>
             ))}
           </Table.Body>
