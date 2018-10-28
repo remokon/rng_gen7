@@ -1,0 +1,36 @@
+.App {
+  margin: 100px auto;
+}
+.header {
+  -webkit-app-region: drag;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+  overflow: hidden;
+  background-color: #2e68b4;
+  color: #ffffff;
+}
+
+.header-item {
+  border-radius: 4px;
+  color: #e8ebe4;
+  float: left;
+  font-size: 18px;
+  line-height: 25px;
+  margin: 16px;
+  padding: 0px;
+  text-align: center;
+  text-decoration: none;
+}
+
+@media all and (min-width: 320px) {
+  .fullOnMobile33 {
+    width: 100vw;
+  }
+}
+@media all and (min-width: 678px) {
+  .fullOnMobile33 {
+    width: 33.33vw;
+  }
+}

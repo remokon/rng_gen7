@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import NavBarMenuSVG from '../img/nav-bar-menu.svg';
 import { setNavBarState } from '../store/dispatchers';
-import '../style/header.css';
 
 export const HeaderBar = ({ screenTitle, setNavBar }) => {
   return (

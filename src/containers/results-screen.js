@@ -1,12 +1,11 @@
-import '../style/header.css';
-import React from 'react';
 import { map } from 'lodash-es';
+import React from 'react';
 import { connect } from 'react-redux';
 import { EggResult } from '../components/egg-result';
 import { StationaryResult } from '../components/stationary-result';
 
 const handleResultType = resultType => {
-  switch(resultType) {
+  switch (resultType) {
     case 'egg':
       return EggResult;
     case 'stationary':
@@ -20,10 +19,12 @@ export const Results = ({ rngResults }) => {
   const { results, type } = rngResults;
   const resultType = handleResultType(type);
 
-  return <div>
+  return (
+    <div>
       Results:
       {map(results, resultType)}
-    </div>;
+    </div>
+  );
 };
 
 export const ResultsScreen = connect(

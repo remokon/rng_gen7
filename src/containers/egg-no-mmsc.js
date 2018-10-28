@@ -1,19 +1,20 @@
-import React from 'react';
-import { assign, intersectionWith, isEmpty, isEqual, join, map, parseInt } from 'lodash-es';
-import { connect } from 'react-redux';
+import { Button } from 'evergreen-ui';
 import { createTimeline } from 'gen7rng';
-import { TextInput } from '../components/text-input';
+import { assign, intersectionWith, isEmpty, isEqual, join, map, parseInt } from 'lodash-es';
+import React from 'react';
+import { connect } from 'react-redux';
 import { StyledButton } from '../components/styled-button';
-import { parseList } from '../utils/parse-number-list';
-import { calcPSV } from '../utils/calc-psv';
+import { TextInput } from '../components/text-input';
 import {
-  setTimelineStart,
   setTimelineNPCCount,
+  setTimelineResults,
   setTimelineSeconds,
   setTimelineSeed,
-  setTimelineResults,
+  setTimelineStart,
   setTimelineTSVs
 } from '../store/dispatchers';
+import { calcPSV } from '../utils/calc-psv';
+import { parseList } from '../utils/parse-number-list';
 
 export const EggMainRNGPID = ({ setStart, setNPCCount, setSeconds, setSeed, setResults, setTSVs, timelineScreen }) => {
   const { npcCount, seconds, seed, startFrame, tsvs, results: timelineResults } = timelineScreen;
@@ -47,6 +48,7 @@ export const EggMainRNGPID = ({ setStart, setNPCCount, setSeconds, setSeed, setR
       />
 
       <StyledButton onClick={setTimeline}>Create timeline</StyledButton>
+      <Button appearance="primary">Hi Evergreen!</Button>
 
       {isEmpty(results) ? '' : map(results, formatResult)}
     </div>
