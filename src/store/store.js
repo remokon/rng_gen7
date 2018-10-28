@@ -23,7 +23,7 @@ export const store = createStore(
   {
     eggSettings: {
       applyFilters: false,
-      eggSeeds: ['00000000', '00000000', '00000000', 'AABBCCDD'],
+      eggSeeds: ['E73ECADD', '547EBB26', '0A7862C1', 'E7415983'],
       femaleAbility: '1',
       femaleItem: 'None',
       femaleIVs: '31/31/31/31/31/31',
@@ -37,7 +37,7 @@ export const store = createStore(
       maleAbility: '1',
       maleItem: 'None',
       maleIVs: '31/31/31/31/31/31',
-      masudaMethod: false,
+      masudaMethod: true,
       nidoType: false,
       otherTSVs: [],
       perfectIVFilter: '0',

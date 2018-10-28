@@ -49,6 +49,8 @@ export const EggSettings = ({ eggSettings, setSetting, setResults, setScreen, se
 
     const parsedUpper = parseIVList(ivFilterUpper);
     const parsedLower = parseIVList(ivFilterLower);
+    console.log(settings);
+
     const eggs = generateEggs(settings, framesToGenerate);
     const isPassingFilters = partial(
       pokemonFilter,
@@ -64,7 +66,6 @@ export const EggSettings = ({ eggSettings, setSetting, setResults, setScreen, se
     setResults({ type: 'egg', results });
     setScreen({ name: 'rngResults', title: 'Egg Results' });
   };
-  console.log(this.state);
 
   const fixEggSeed = value => {
     let fixedValue = value;
@@ -89,7 +90,7 @@ export const EggSettings = ({ eggSettings, setSetting, setResults, setScreen, se
             onChange={e => setEggSettingProperty('eggSeeds', parseSeedList(e.target.value))}
             value={join(eggSeeds, ', ').toUpperCase()}
             required
-            maxlength="38"
+            maxLength="38"
           />
         </Pane>
         <Pane margin={8}>
@@ -213,7 +214,7 @@ export const EggSettings = ({ eggSettings, setSetting, setResults, setScreen, se
           <TextInputField
             label="Your TSV"
             placeholder="Your TSV"
-            onChange={tsv => saveSetting('playerTSV')(parseInt(tsv))}
+            onChange={e => setEggSettingProperty('playerTSV', parseInt(e.target.value))}
             value={playerTSV}
           />
           <TextInputField
@@ -250,7 +251,7 @@ export const EggSettings = ({ eggSettings, setSetting, setResults, setScreen, se
           <TextInputField
             label="Perfect IVs"
             placeholder="Perfect IVs"
-            onChange={saveSetting('perfectIVFilter')}
+            onChange={e => setEggSettingProperty('perfectIVFilter', e.target.value)}
             value={perfectIVFilter}
           />
         </Pane>
@@ -291,17 +292,17 @@ export const EggSettings = ({ eggSettings, setSetting, setResults, setScreen, se
           <Checkbox
             label="Parents are Nidoran"
             checked={nidoType}
-            onCheckHandler={e => setEggSettingProperty('nidoType', e.target.checked)}
+            onChange={e => setEggSettingProperty('nidoType', e.target.checked)}
           />
           <Checkbox
             label="Parents the same species"
             checked={sameDexNumber}
-            onCheckHandler={e => setEggSettingProperty('sameDexNumber', e.target.checked)}
+            onChange={e => setEggSettingProperty('sameDexNumber', e.target.checked)}
           />
           <Checkbox
             label="The female is Ditto"
             checked={isFemaleDitto}
-            onCheckHandler={e => setEggSettingProperty('isFemaleDitto', e.target.checked)}
+            onChange={e => setEggSettingProperty('isFemaleDitto', e.target.checked)}
           />
         </Pane>
 
@@ -309,7 +310,7 @@ export const EggSettings = ({ eggSettings, setSetting, setResults, setScreen, se
           <TextInputField
             label="Frames upper limit"
             placeholder="400"
-            onChange={saveSetting('framesToGenerate')}
+            onChange={e => setEggSettingProperty('framesToGenerate', e.target.value)}
             value={framesToGenerate}
             required
           />
