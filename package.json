@@ -2,6 +2,7 @@
   "name": "gen7-react-rng",
   "version": "0.1.0",
   "dependencies": {
+    "evergreen-ui": "^4.2.0",
     "gen7rng": "git+https://github.com/zaksabeast/Gen7RNG.git",
     "lodash-es": "^4.17.10",
     "react": "^16.4.2",

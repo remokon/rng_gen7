@@ -15,25 +15,14 @@ import {
   setTimelineTSVs
 } from '../store/dispatchers';
 
-export const EggMainRNGPID = ({
-  setStart,
-  setNPCCount,
-  setSeconds,
-  setSeed,
-  setResults,
-  setTSVs,
-  timelineScreen
-}) => {
-  const {
-    npcCount,
-    seconds,
-    seed,
-    startFrame,
-    tsvs,
-    results: timelineResults
-  } = timelineScreen;
+export const EggMainRNGPID = ({ setStart, setNPCCount, setSeconds, setSeed, setResults, setTSVs, timelineScreen }) => {
+  const { npcCount, seconds, seed, startFrame, tsvs, results: timelineResults } = timelineScreen;
   const formattedTSVs = map(tsvs, parseInt);
-  const formatResult = ({ frame, psv }) => <div>Frame: {frame} - PSV: {psv}</div>;
+  const formatResult = ({ frame, psv }) => (
+    <div>
+      Frame: {frame} - PSV: {psv}
+    </div>
+  );
   const setTimeline = () => {
     const timelineArgs = map([startFrame, npcCount, seconds, 38], parseInt);
     const timeline = createTimeline(parseInt(seed, 16), ...timelineArgs);
@@ -44,7 +33,8 @@ export const EggMainRNGPID = ({
     ? timelineResults
     : intersectionWith(timelineResults, formattedTSVs, ({ psv }, tsv) => isEqual(psv, tsv));
 
-  return <div>
+  return (
+    <div>
       <TextInput placeholder="Init Seed" onChange={setSeed} />
       <TextInput placeholder="Start frame" onChange={setStart} />
       <TextInput placeholder="NPC Count" onChange={setNPCCount} />
@@ -56,16 +46,11 @@ export const EggMainRNGPID = ({
         value={join(tsvs, ', ')}
       />
 
-      <StyledButton onClick={setTimeline}>
-        Create timeline
-      </StyledButton>
+      <StyledButton onClick={setTimeline}>Create timeline</StyledButton>
 
-      {
-        isEmpty(results)
-          ? ''
-          : map(results, formatResult)
-      }
-    </div>;
+      {isEmpty(results) ? '' : map(results, formatResult)}
+    </div>
+  );
 };
 
 export const EggMainRNGPIDScreen = connect(

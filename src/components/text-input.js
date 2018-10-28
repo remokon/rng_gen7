@@ -19,7 +19,6 @@ export const TextInput = ({ placeholder, onChange, value }) => {
     margin: '0px 0px 1px 0px',
     outline: 'none',
     padding: '0px 0px 0px 5px'
-    // width: "315px"
   };
 
   return (
