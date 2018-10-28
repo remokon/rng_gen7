@@ -61,7 +61,7 @@ export const Results = ({ rngResults }) => {
           </Table.Head>
           <Table.Body>
             {results.map((o, i) => (
-              <Table.Row intent={o.egg.shiny ? 'success' : 'none'} key={i} isSelectable>
+              <Table.Row height="30" intent={o.egg.shiny ? 'success' : 'none'} key={i} isSelectable>
                 <Table.TextCell isNumber>{o.frame}</Table.TextCell>
                 <Table.TextCell isNumber>{o.frameAdvance}</Table.TextCell>
                 <Table.TextCell isNumber>{o.egg.nature}</Table.TextCell>
