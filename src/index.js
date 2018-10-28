@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './style/index.css';
 import registerServiceWorker from './registerServiceWorker';
 import { AppContainer } from './containers/app';
 import { Provider } from 'react-redux';

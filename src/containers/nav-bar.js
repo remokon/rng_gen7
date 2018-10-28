@@ -1,22 +1,18 @@
-import './style/nav-bar.css';
 import React from 'react';
 import { connect } from 'react-redux';
 import { changeScreen, setNavBarState } from '../store/dispatchers';
+import '../style/nav-bar.css';
 
-export const NavBar = ({
-  isNavBarOpen,
-  setScreen,
-  setNavBar,
-}) => {
+export const NavBar = ({ isNavBarOpen, setScreen, setNavBar }) => {
   const containerStyle = {
     boxShadow: 'none',
-    width: isNavBarOpen ? '100%' : '0px',
+    width: isNavBarOpen ? '100%' : '0px'
   };
   const navBarStyle = {
-    width: isNavBarOpen ? '240px' : '0px',
+    width: isNavBarOpen ? '240px' : '0px'
   };
   const navHeaderStyle = {
-    backgroundColor: '#0277BD',
+    backgroundColor: '#0277BD'
   };
   const setNav = toggle => setNavBar(toggle);
 
@@ -32,7 +28,9 @@ export const NavBar = ({
           <a onClick={() => setScreen({ name: 'mainRngEggPID', title: 'No MM/SC Egg PID' })}>No MM/SC Egg PID</a>
           <a onClick={() => setScreen({ name: 'stationary', title: 'Stationary RNG' })}>Stationary RNG</a>
           <a onClick={() => setScreen({ name: 'event', title: 'Event RNG' })}>Event RNG</a>
-          <a onClick={() => setScreen({ name: 'stationaryPresets', title: 'Stationary Presets' })}>Stationary Presets</a>
+          <a onClick={() => setScreen({ name: 'stationaryPresets', title: 'Stationary Presets' })}>
+            Stationary Presets
+          </a>
         </div>
       </div>
     </div>

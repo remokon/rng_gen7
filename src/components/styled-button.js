@@ -1,4 +1,4 @@
-import './style/styled-button.css';
+import '../style/styled-button.css';
 import React from 'react';
 
 export const StyledButton = ({ children, onClick, color, style }) => {

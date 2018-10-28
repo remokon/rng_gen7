@@ -4,6 +4,9 @@
   top: 0;
   width: 100%;
   z-index: 1;
+  overflow: hidden;
+  background-color: #2e68b4;
+  color: #ffffff;
 }
 
 .header-item {

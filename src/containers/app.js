@@ -1,5 +1,5 @@
 import React from "react";
-import "./style/app.css";
+import "../style/app.css";
 import { connect } from "react-redux";
 import { EggSettingsScreen } from "./egg-settings-screen";
 import { StationarySettingsScreen } from "./stationary-settings-screen";

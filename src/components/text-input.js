@@ -1,4 +1,4 @@
-import './style/text-input.css';
+import '../style/text-input.css';
 import React from 'react';
 
 export const TextInput = ({ placeholder, onChange, value }) => {

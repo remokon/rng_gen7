@@ -1,5 +1,5 @@
 import React from 'react';
-import check from './check.svg';
+import check from '../img/check.svg';
 
 export const Checkbox = ({ onCheckHandler, color, label, checked, style }) => {
   const onClick = () => onCheckHandler(!checked);
@@ -12,7 +12,7 @@ export const Checkbox = ({ onCheckHandler, color, label, checked, style }) => {
     height: '20px',
     margin: '0px 20px 0px 0px',
     width: '20px',
-    transition: '.2s',
+    transition: '.2s'
   };
   const labelStyle = {
     display: 'inline-block',
@@ -27,11 +27,11 @@ export const Checkbox = ({ onCheckHandler, color, label, checked, style }) => {
   return (
     <div style={containerStyle}>
       <div style={checkStyle} onClick={onClick}>
-        {
-          checked
-            ? <img src={check} style={{ width: '20px', height: '21px' }}/>
-            : <div style={{ width: '20px', height: '20px' }}/>
-        }
+        {checked ? (
+          <img src={check} style={{ width: '20px', height: '21px' }} />
+        ) : (
+          <div style={{ width: '20px', height: '20px' }} />
+        )}
       </div>
       <label style={{ ...labelStyle, ...style }} onClick={onClick}>
         {label}
