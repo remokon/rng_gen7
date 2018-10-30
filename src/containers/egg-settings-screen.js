@@ -8,7 +8,7 @@ import { TitleText } from '../components/title-text';
 import { changeScreen, setRNGResults, setEggSetting } from '../store/dispatchers';
 import { parseList, parseIVList, parseSeedList } from '../utils/parse-number-list';
 import { pokemonFilter } from '../utils/pokemon-filters';
-import { Button, Pane, Text, TextInputField, TextInput, Checkbox, RadioGroup } from 'evergreen-ui';
+import { Button, Icon, Link, Pane, Text, TextInputField, TextInput, Checkbox, RadioGroup, Select} from 'evergreen-ui';
 import { setEggSettingProperty } from '../actions/eggSettings';
 
 export const EggSettings = ({ eggSettings, setSetting, setResults, setScreen, setEggSettingProperty }) => {
@@ -94,25 +94,23 @@ export const EggSettings = ({ eggSettings, setSetting, setResults, setScreen, se
           />
         </Pane>
         <Pane margin={8}>
-          <RadioGroup
+          <Select width={48}
             label="Female Ability"
             value={femaleAbility}
-            options={[
-              { label: 'Female Ability 1', value: '1' },
-              { label: 'Female Ability 2', value: '2' },
-              { label: 'Female Ability H', value: 'H' }
-            ]}
-            onChange={saveSetting('femaleAbility')}
-          />
+            onChange={saveSetting('femaleAbility')}>
+            <option value='1'>1</option>
+            <option value='2'>2</option>
+            <option value='H'>H</option>            
+          </Select>
         </Pane>
         <Pane margin={8}>
           <RadioGroup
             label="Male Ability"
             value={maleAbility}
             options={[
-              { label: 'Male Ability 1', value: '1' },
-              { label: 'Male Ability 2', value: '2' },
-              { label: 'Male Ability H', value: 'H' }
+              { label: '1', value: '1' },
+              { label: '2', value: '2' },
+              { label: 'H', value: 'H' }
             ]}
             onChange={saveSetting('maleAbility')}
           />
@@ -315,13 +313,17 @@ export const EggSettings = ({ eggSettings, setSetting, setResults, setScreen, se
             required
           />
         </Pane>
+        <Pane margin={8} display="flex" alignItems="center" className="fullOnMobile33">
+          <Button onClick={handleGenerateEggs}>
+            Run!   .
+            
+            <Icon icon="random" color="warning"/>
 
-        <Pane margin={8} className="fullOnMobile33">
-          <Button appearance="primary" onClick={handleGenerateEggs}>
-            Generate Eggs!
           </Button>
         </Pane>
+        
       </Pane>
+
     </div>
   );
 };

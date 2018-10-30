@@ -25,7 +25,14 @@ export const Results = ({ rngResults }) => {
   const is31 = ivNumber => {
     if (ivNumber === 31) {
       return (
-        <Text fontFamily="mono" fontWeight="800">
+        <Text color="#65C85D" fontFamily="mono" fontWeight="50">
+          {ivNumber}
+        </Text>
+      );
+    }
+    if (ivNumber === 0) {
+      return (
+        <Text color="#DD7373" fontFamily="mono" fontWeight="600">
           {ivNumber}
         </Text>
       );
@@ -63,7 +70,7 @@ export const Results = ({ rngResults }) => {
             {results.map((o, i) => (
               <Table.Row height="30" intent={o.egg.shiny ? 'success' : 'none'} key={i} isSelectable>
                 <Table.TextCell isNumber>{o.frame}</Table.TextCell>
-                <Table.TextCell isNumber>{o.frameAdvance}</Table.TextCell>
+                <Table.TextCell isNumber>+{o.frameAdvance}</Table.TextCell>
                 <Table.TextCell isNumber>{o.egg.nature}</Table.TextCell>
                 {o.egg.ivs.map((o, i) => {
                   return (
