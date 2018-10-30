@@ -16,16 +16,16 @@ const handleScreen = screenName => {
       return <EggSettingsScreen />;
     case "rngResults":
       return <ResultsScreen />;
-    case "safeFrames":
-      return <SafeFrameScreen />;
-    case "mainRngEggPID":
-      return <EggMainRNGPIDScreen />;
-    case "stationary":
-      return <StationarySettingsScreen />;
-    case "event":
-      return <EventSettingsScreen />;
-    case "stationaryPresets":
-      return <StationaryPresetsScreen />;
+    // case "safeFrames":
+    //   return <SafeFrameScreen />;
+    // case "mainRngEggPID":
+    //   return <EggMainRNGPIDScreen />;
+    // case "stationary":
+    //   return <StationarySettingsScreen />;
+    // case "event":
+    //   return <EventSettingsScreen />;
+    // case "stationaryPresets":
+    //   return <StationaryPresetsScreen />;
   }
 
   return <EggSettingsScreen />;

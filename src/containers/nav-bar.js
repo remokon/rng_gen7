@@ -24,13 +24,13 @@ export const NavBar = ({ isNavBarOpen, setScreen, setNavBar }) => {
             Gen 7 RNG
           </div>
           <a onClick={() => setScreen({ name: 'main', title: 'Egg RNG' })}>Egg RNG</a>
-          <a onClick={() => setScreen({ name: 'safeFrames', title: 'Timeline Safe Frame' })}>Timeline Safe Frame</a>
-          <a onClick={() => setScreen({ name: 'mainRngEggPID', title: 'No MM/SC Egg PID' })}>No MM/SC Egg PID</a>
-          <a onClick={() => setScreen({ name: 'stationary', title: 'Stationary RNG' })}>Stationary RNG</a>
-          <a onClick={() => setScreen({ name: 'event', title: 'Event RNG' })}>Event RNG</a>
-          <a onClick={() => setScreen({ name: 'stationaryPresets', title: 'Stationary Presets' })}>
-            Stationary Presets
-          </a>
+          {/* <a onClick={() => setScreen({ name: 'safeFrames', title: 'Timeline Safe Frame' })}>Timeline Safe Frame</a> */}
+          {/* <a onClick={() => setScreen({ name: 'mainRngEggPID', title: 'No MM/SC Egg PID' })}>No MM/SC Egg PID</a> */}
+          {/* <a onClick={() => setScreen({ name: 'stationary', title: 'Stationary RNG' })}>Stationary RNG</a> */}
+          {/* <a onClick={() => setScreen({ name: 'event', title: 'Event RNG' })}>Event RNG</a> */}
+          {/* <a onClick={() => setScreen({ name: 'stationaryPresets', title: 'Stationary Presets' })}> */}
+            {/* Stationary Presets */}
+          {/* </a> */}
         </div>
       </div>
     </div>
