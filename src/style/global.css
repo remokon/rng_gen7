@@ -3,8 +3,19 @@
 }
 
 .App {
-  margin: 100px auto;
+  /* margin: 100px auto; */
   /* font-family: 'Montserrat', sans-serif; */
+}
+
+.logo {
+  float: left;
+  padding: 0 24px;
+  font-size: 26px;
+  font-weight: bold;
+}
+.ant-layout-header {
+  background: #fff;
+  margin-bottom: 16px;
 }
 
 .header {
@@ -18,26 +29,6 @@
   color: #ffffff;
 }
 
-.header-item {
-  border-radius: 4px;
-  color: #e8ebe4;
-  float: left;
-  font-size: 18px;
-  line-height: 25px;
-  margin: 16px;
-  padding: 0px;
-  text-align: center;
-  text-decoration: none;
-}
-
-@media all and (min-width: 320px) {
-  .fullOnMobile33 {
-    width: 100vw;
-  }
-}
-
-@media all and (min-width: 678px) {
-  .fullOnMobile33 {
-    width: 33.33vw;
-  }
+.input_lable {
+  margin-top: 16px;
 }

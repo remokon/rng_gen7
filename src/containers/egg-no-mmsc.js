@@ -1,4 +1,3 @@
-import { Button } from 'evergreen-ui';
 import { createTimeline } from 'gen7rng';
 import { assign, intersectionWith, isEmpty, isEqual, join, map, parseInt } from 'lodash-es';
 import React from 'react';
@@ -48,7 +47,7 @@ export const EggMainRNGPID = ({ setStart, setNPCCount, setSeconds, setSeed, setR
       />
 
       <StyledButton onClick={setTimeline}>Create timeline</StyledButton>
-      <Button appearance="primary">Hi Evergreen!</Button>
+      {/* <Button appearance="primary">Hi Evergreen!</Button> */}
 
       {isEmpty(results) ? '' : map(results, formatResult)}
     </div>

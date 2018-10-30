@@ -1,48 +1,57 @@
-import { Pane, Table, Text } from 'evergreen-ui';
 import { join, map, reverse } from 'lodash-es';
 import React from 'react';
 import { connect } from 'react-redux';
-import { EggResult } from '../components/egg-result';
-import { StationaryResult } from '../components/stationary-result';
+// import { EggResult } from '../components/egg-result';
+// import { StationaryResult } from '../components/stationary-result';
 import { parseHexSeed } from '../utils/parse-hex-seed';
+import { Table, Divider, Tag } from 'antd';
 
-const handleResultType = resultType => {
-  switch (resultType) {
-    case 'egg':
-      return EggResult;
-    case 'stationary':
-      return StationaryResult;
-  }
+// const handleResultType = resultType => {
+//   switch (resultType) {
+//     case 'egg':
+//       return EggResult;
+//     case 'stationary':
+//       return StationaryResult;
+//   }
 
-  return EggResult;
-};
+//   return EggResult;
+// };
 
 export const Results = ({ rngResults }) => {
   const { results, type } = rngResults;
-  const resultType = handleResultType(type);
+  // const resultType = handleResultType(type);
   console.log(rngResults);
 
-  const is31 = ivNumber => {
-    if (ivNumber === 31) {
-      return (
-        <Text color="#65C85D" fontFamily="mono" fontWeight="600">
-          {ivNumber}
-        </Text>
-      );
+  // const is31 = ivNumber => {
+  //   if (ivNumber === 31) {
+  //     return (
+  //       <Text color="#65C85D" fontFamily="mono" fontWeight="600">
+  //         {ivNumber}
+  //       </Text>
+  //     );
+  //   }
+  //   if (ivNumber === 0) {
+  //     return (
+  //       <Text color="#DD7373" fontFamily="mono" fontWeight="600">
+  //         {ivNumber}
+  //       </Text>
+  //     );
+  //   }
+  //   return ivNumber;
+  // };
+
+  const columns = [
+    {
+      title: 'Frame',
+      dataIndex: 'frame',
+      key: 'frame'
     }
-    if (ivNumber === 0) {
-      return (
-        <Text color="#DD7373" fontFamily="mono" fontWeight="600">
-          {ivNumber}
-        </Text>
-      );
-    }
-    return ivNumber;
-  };
+  ];
 
   return (
     <div>
-      <Pane
+      <Table columns={columns} dataSource={results} />
+      {/* <Pane
         display="flex"
         padding={16}
         display="flex"
@@ -99,7 +108,7 @@ export const Results = ({ rngResults }) => {
             ))}
           </Table.Body>
         </Table>
-      </Pane>
+      </Pane> */}
     </div>
   );
 };
