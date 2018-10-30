@@ -25,7 +25,7 @@ export const Results = ({ rngResults }) => {
   const is31 = ivNumber => {
     if (ivNumber === 31) {
       return (
-        <Text color="#65C85D" fontFamily="mono" fontWeight="50">
+        <Text color="#65C85D" fontFamily="mono" fontWeight="600">
           {ivNumber}
         </Text>
       );
@@ -64,7 +64,7 @@ export const Results = ({ rngResults }) => {
             <Table.TextHeaderCell>Gender</Table.TextHeaderCell>
             <Table.TextHeaderCell>Ability</Table.TextHeaderCell>
             <Table.TextHeaderCell>Psv</Table.TextHeaderCell>
-            <Table.TextHeaderCell flexBasis={'314px'}>Seeds</Table.TextHeaderCell>
+            <Table.TextHeaderCell flexBasis={'314px'}>Seed</Table.TextHeaderCell>
           </Table.Head>
           <Table.Body>
             {results.map((o, i) => (

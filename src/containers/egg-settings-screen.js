@@ -8,7 +8,7 @@ import { TitleText } from '../components/title-text';
 import { changeScreen, setRNGResults, setEggSetting } from '../store/dispatchers';
 import { parseList, parseIVList, parseSeedList } from '../utils/parse-number-list';
 import { pokemonFilter } from '../utils/pokemon-filters';
-import { Button, Icon, Link, Pane, Text, TextInputField, TextInput, Checkbox, RadioGroup, Select} from 'evergreen-ui';
+import { Button, Icon, Link, Heading, Pane, Text, TextInputField, TextInput, Checkbox, RadioGroup, Combobox, Select} from 'evergreen-ui';
 import { setEggSettingProperty } from '../actions/eggSettings';
 
 export const EggSettings = ({ eggSettings, setSetting, setResults, setScreen, setEggSettingProperty }) => {
@@ -85,7 +85,7 @@ export const EggSettings = ({ eggSettings, setSetting, setResults, setScreen, se
       >
         <Pane margin={8} className="fullOnMobile33">
           <TextInputField
-            label="Egg seeds"
+            label="🌱 Egg seed 🌱"
             placeholder="Egg seeds"
             onChange={e => setEggSettingProperty('eggSeeds', parseSeedList(e.target.value))}
             value={join(eggSeeds, ', ').toUpperCase()}
@@ -93,30 +93,30 @@ export const EggSettings = ({ eggSettings, setSetting, setResults, setScreen, se
             maxLength="38"
           />
         </Pane>
+
         <Pane margin={8}>
-          <Select width={48}
-            label="Female Ability"
-            value={femaleAbility}
-            onChange={saveSetting('femaleAbility')}>
-            <option value='1'>1</option>
-            <option value='2'>2</option>
-            <option value='H'>H</option>            
-          </Select>
-        </Pane>
-        <Pane margin={8}>
-          <RadioGroup
-            label="Male Ability"
-            value={maleAbility}
-            options={[
-              { label: '1', value: '1' },
-              { label: '2', value: '2' },
-              { label: 'H', value: 'H' }
-            ]}
-            onChange={saveSetting('maleAbility')}
-          />
-        </Pane>
-        <Pane margin={8}>
-          <RadioGroup
+        <img src={"https://www.serebii.net/pokedex-sm/icon/241.png"}/>
+        <Combobox
+          width={120}
+          label="Female Ability"
+          value={femaleAbility}
+          // defaultSelectedItem={'1'}
+          items={['1','2','H']}
+          placeholder={'♀ Ability'}
+          onChange={saveSetting('femaleAbility')}
+        />
+        <Combobox
+          width={120}
+          label="Female Item"
+          value={femaleItem}
+          // defaultSelectedItem={'1'}
+          placeholder={'♀ Item'}
+
+          items={['None','Everstone','Destiny Knot', 'Power Weight', 'Power Bracer', 'Power Belt', 'Power Lens', 'Power Band', 'Power Anklet']}
+          onChange={saveSetting('femaleItem')}
+        />
+
+        {/* <RadioGroup
             label="Female Item"
             value={femaleItem}
             options={[
@@ -131,29 +131,7 @@ export const EggSettings = ({ eggSettings, setSetting, setResults, setScreen, se
               { label: 'Power Anklet', value: 'Power Anklet' }
             ]}
             onChange={saveSetting('femaleItem')}
-          />
-        </Pane>
-
-        <Pane margin={8}>
-          <RadioGroup
-            label="Male Item"
-            value={maleItem}
-            options={[
-              { label: 'None', value: 'None' },
-              { label: 'Everstone', value: 'Everstone' },
-              { label: 'Destiny Knot', value: 'Destiny Knot' },
-              { label: 'Power Weight', value: 'Power Weight' },
-              { label: 'Power Bracer', value: 'Power Bracer' },
-              { label: 'Power Belt', value: 'Power Belt' },
-              { label: 'Power Lens', value: 'Power Lens' },
-              { label: 'Power Band', value: 'Power Band' },
-              { label: 'Power Anklet', value: 'Power Anklet' }
-            ]}
-            onChange={saveSetting('maleItem')}
-          />
-        </Pane>
-
-        <Pane margin={8}>
+          /> */}
           <RadioGroup
             label="Female IVs"
             value={femaleIVs}
@@ -171,7 +149,46 @@ export const EggSettings = ({ eggSettings, setSetting, setResults, setScreen, se
             value={join(parseList(2, '/', femaleIVs), '/')}
           />
         </Pane>
+        
         <Pane margin={8}>
+        <img src={"https://www.serebii.net/pokedex-sm/icon/128.png"}/>
+
+        <Combobox
+          width={120}
+          label="Male Ability"
+          value={maleAbility}
+          // defaultSelectedItem={'1'}
+          placeholder={'♂ Ability'}
+
+          items={['1','2','H']}
+          onChange={saveSetting('maleAbility')}
+        />
+          <Combobox
+          width={120}
+          label="Male Item"
+          value={maleItem}
+          // defaultSelectedItem={'1'}
+          placeholder={'♂ Item'}
+
+          items={['None','Everstone','Destiny Knot', 'Power Weight', 'Power Bracer', 'Power Belt', 'Power Lens', 'Power Band', 'Power Anklet']}
+          onChange={saveSetting('maleItem')}
+        />
+          {/* <RadioGroup
+            label="Male Item"
+            value={maleItem}
+            options={[
+              { label: 'None', value: 'None' },
+              { label: 'Everstone', value: 'Everstone' },
+              { label: 'Destiny Knot', value: 'Destiny Knot' },
+              { label: 'Power Weight', value: 'Power Weight' },
+              { label: 'Power Bracer', value: 'Power Bracer' },
+              { label: 'Power Belt', value: 'Power Belt' },
+              { label: 'Power Lens', value: 'Power Lens' },
+              { label: 'Power Band', value: 'Power Band' },
+              { label: 'Power Anklet', value: 'Power Anklet' }
+            ]}
+            onChange={saveSetting('maleItem')}
+          /> */}
           <RadioGroup
             label="Male IVs"
             value={maleIVs}
@@ -188,9 +205,7 @@ export const EggSettings = ({ eggSettings, setSetting, setResults, setScreen, se
             onChange={saveSetting('maleIVs')}
             value={join(parseList(2, '/', maleIVs), '/')}
           />
-        </Pane>
 
-        <Pane margin={8}>
           <RadioGroup
             label="Gender Ratio (F:M)"
             value={genderRatio}
@@ -210,7 +225,7 @@ export const EggSettings = ({ eggSettings, setSetting, setResults, setScreen, se
 
         <Pane margin={8}>
           <TextInputField
-            label="Your TSV"
+            label="Your TSV ✨"
             placeholder="Your TSV"
             onChange={e => setEggSettingProperty('playerTSV', parseInt(e.target.value))}
             value={playerTSV}
@@ -313,11 +328,9 @@ export const EggSettings = ({ eggSettings, setSetting, setResults, setScreen, se
             required
           />
         </Pane>
-        <Pane margin={8} display="flex" alignItems="center" className="fullOnMobile33">
-          <Button onClick={handleGenerateEggs}>
-            Run!   .
-            
-            <Icon icon="random" color="warning"/>
+        <Pane margin={8} display="flex"  className="fullOnMobile33">
+          <Button appearance="primary" iconAfter="double-chevron-right" onClick={handleGenerateEggs}>
+            RNGenerate! 
 
           </Button>
         </Pane>
