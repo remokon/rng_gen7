@@ -10,7 +10,7 @@ import { parseList, parseIVList, parseSeedList } from '../utils/parse-number-lis
 import { pokemonFilter } from '../utils/pokemon-filters';
 
 const stats = ['HP', 'Atk', 'Def', 'SpA', 'SpD', 'Spe'];
-const seedImg = <img src={"https://www.serebii.net/itemdex/sprites/grassyseed.png"} />
+const seedImg = <img src={'https://www.serebii.net/itemdex/sprites/grassyseed.png'} />;
 
 const Option = Select.Option;
 const RadioGroup = Radio.Group;
@@ -153,9 +153,16 @@ class EggSettings extends Component {
         <Row gutter={16}>
           <Col xs={24} sm={24} md={24} lg={12} xl={12}>
             {/* <Card> */}
-            <Card title={<span> {seedImg} &nbsp; — Enter your seed — &nbsp; {seedImg} </span>}>
+            <Card
+              title={
+                <span>
+                  {' '}
+                  {seedImg} &nbsp; — Enter your seed — &nbsp; {seedImg}{' '}
+                </span>
+              }
+            >
               <Input
-                style={{ fontFamily: "monospace" }}
+                style={{ fontFamily: 'monospace' }}
                 placeholder="Egg seeds"
                 onChange={e => setEggSettingProperty('eggSeeds', parseSeedList(e.target.value))}
                 value={join(eggSeeds, ', ').toUpperCase()}
@@ -167,15 +174,9 @@ class EggSettings extends Component {
         </Row>
 
         <Row gutter={16} style={{ marginTop: '16px' }}>
-
-
-
           <Col xs={24} sm={24} md={24} lg={12} xl={12}>
             <Card title="Parents Info">
-              <RadioGroup
-                value={genderRatio}
-                onChange={e => setEggSettingProperty('genderRatio', e.target.value)}
-              >
+              <RadioGroup value={genderRatio} onChange={e => setEggSettingProperty('genderRatio', e.target.value)}>
                 <Radio value={'Female only'}> F only</Radio>
                 <Radio value={'7:1'}> 7:1 </Radio>
                 <Radio value={'3:1'}> 3:1 </Radio>
@@ -184,13 +185,12 @@ class EggSettings extends Component {
                 <Radio value={'1:7'}> 1:7 </Radio>
                 <Radio value={'Male only'}> M only </Radio>
                 <Radio value={'Genderless'}> Genderless </Radio>
-
               </RadioGroup>
-              <Divider></Divider>
+              <Divider />
               <Col xs={10} sm={10} md={10} lg={5} xl={5}>
                 <p>
                   <img src={'https://www.serebii.net/pokedex-sm/icon/031.png'} /> — &nbsp; ♀
-              </p>
+                </p>
                 <Select style={{ width: '40%' }} defaultValue={femaleAbility} onChange={saveSetting('femaleAbility')}>
                   <Option value="1">1</Option>
                   <Option value="2">2</Option>
@@ -214,13 +214,13 @@ class EggSettings extends Component {
                     </Option>
                   ))}
                 </Select>
-                <p></p>
+                <p />
                 {this.state.st_femaleIVs.map((o, i) => {
                   return (
                     <Row key={i}>
                       <Col style={{ marginBottom: '2px' }} xs={8} sm={8} md={8} lg={8} xl={8}>
                         <InputNumber
-                          style={{ fontFamily: "monospace" }}
+                          style={{ fontFamily: 'monospace' }}
                           min={0}
                           max={31}
                           onChange={value => this.modifyFemaleIvs(i, value)}
@@ -236,9 +236,16 @@ class EggSettings extends Component {
                 })}
               </Col>
               <Col xs={2} sm={2} md={2} lg={1} xl={1}>
-                <Row gutter={16} style={{ marginTop: '16px' }}> &nbsp; </Row>
-                <Row justify={"center"} gutter={16} style={{ marginTop: '12px' }}><img src={'https://serebii.net/itemdex/sprites/abilitycapsule.png'} /></Row>
-                <Row justify={"center"} gutter={16} style={{ marginTop: '8px' }}><img src={'https://www.serebii.net/itemdex/gsitem.png'} /></Row>
+                <Row gutter={16} style={{ marginTop: '16px' }}>
+                  {' '}
+                  &nbsp;{' '}
+                </Row>
+                <Row justify={'center'} gutter={16} style={{ marginTop: '12px' }}>
+                  <img src={'https://serebii.net/itemdex/sprites/abilitycapsule.png'} />
+                </Row>
+                <Row justify={'center'} gutter={16} style={{ marginTop: '8px' }}>
+                  <img src={'https://www.serebii.net/itemdex/gsitem.png'} />
+                </Row>
                 {/* <Row gutter={16} style={{ marginTop: '24px' }}>HP</Row>        
                 <Row gutter={16} style={{ marginTop: '14px' }}>Atk</Row>        
                 <Row gutter={16} style={{ marginTop: '14px' }}>Def</Row>        
@@ -249,7 +256,7 @@ class EggSettings extends Component {
               <Col xs={10} sm={10} md={10} lg={5} xl={5}>
                 <p>
                   <img src={'https://www.serebii.net/pokedex-sm/icon/034.png'} /> — &nbsp; ♂
-              </p>
+                </p>
                 <Select style={{ width: '40%' }} defaultValue={maleAbility} onChange={saveSetting('maleAbility')}>
                   <Option value="1">1</Option>
                   <Option value="2">2</Option>
@@ -273,13 +280,13 @@ class EggSettings extends Component {
                     </Option>
                   ))}
                 </Select>
-                <p></p>
+                <p />
                 {this.state.st_maleIVs.map((o, i) => {
                   return (
                     <Row key={i}>
                       <Col style={{ marginBottom: '2px' }} xs={8} sm={8} md={8} lg={8} xl={8}>
                         <InputNumber
-                          style={{ fontFamily: "monospace" }}
+                          style={{ fontFamily: 'monospace' }}
                           min={0}
                           max={31}
                           onChange={value => this.modifyMaleIvs(i, value)}
@@ -293,23 +300,20 @@ class EggSettings extends Component {
                     </Row>
                   );
                 })}
-
               </Col>
-
             </Card>
-
           </Col>
-
         </Row>
 
         <Row gutter={16} style={{ marginTop: '16px' }}>
           <Col xs={24} sm={24} md={24} lg={12} xl={12}>
-
             <Card title="Shinies ✨">
               <Col xs={12} sm={12} md={12} lg={6} xl={6}>
-                <p> Your TSV: &nbsp;
-              <InputNumber
-                    style={{ fontFamily: "monospace" }}
+                <p>
+                  {' '}
+                  Your TSV: &nbsp;
+                  <InputNumber
+                    style={{ fontFamily: 'monospace' }}
                     min={0}
                     max={4096}
                     placeholder={2925}
@@ -319,18 +323,18 @@ class EggSettings extends Component {
                 </p>
               </Col>
               <Col xs={12} sm={12} md={12} lg={6} xl={6}>
-                <p> Other TSVs: &nbsp;
-              <Input
-                    style={{ fontFamily: "monospace", width: "70%" }}
+                <p>
+                  {' '}
+                  Other TSVs: &nbsp;
+                  <Input
+                    style={{ fontFamily: 'monospace', width: '70%' }}
                     onChange={tsvList => saveSetting('otherTSVs')(parseList(4, ',', tsvList.target.value))}
                     value={otherTSVs}
                   />
                 </p>
               </Col>
 
-
-
-              <Row >
+              <Row>
                 <Col>
                   <Checkbox
                     checked={masudaMethod}
@@ -338,39 +342,34 @@ class EggSettings extends Component {
                   >
                     Masuda Method
                   </Checkbox>
-                  <Checkbox
-                    checked={shinyCharm}
-                    onChange={e => setEggSettingProperty('shinyCharm', e.target.checked)}
-                  >
+                  <Checkbox checked={shinyCharm} onChange={e => setEggSettingProperty('shinyCharm', e.target.checked)}>
                     Shiny Charm
                   </Checkbox>
                 </Col>
               </Row>
-
-
-
             </Card>
 
             <Row gutter={16} style={{ marginTop: '16px' }}>
               <Col xs={24} sm={24} md={24} lg={12} xl={12}>
                 <Card title="Results filters">
                   <Col>
-                    <p> # perfect IVs: &nbsp;
-                  <InputNumber
+                    <p>
+                      {' '}
+                      # perfect IVs: &nbsp;
+                      <InputNumber
                         min={0}
                         max={6}
-                        style={{ fontFamily: "monospace" }}
+                        style={{ fontFamily: 'monospace' }}
                         onChange={e => setEggSettingProperty('perfectIVFilter', e)}
                         value={perfectIVFilter}
                       />
                     </p>
-
                   </Col>
                   <Col>
                     <p>
                       Frames upper limit: &nbsp;
-                  <Input
-                        style={{ fontFamily: "monospace", width: "20%" }}
+                      <Input
+                        style={{ fontFamily: 'monospace', width: '20%' }}
                         placeholder={400}
                         onChange={e => setEggSettingProperty('framesToGenerate', e.target.value)}
                         value={framesToGenerate}
@@ -379,18 +378,14 @@ class EggSettings extends Component {
                     </p>
                   </Col>
                 </Card>
-
               </Col>
             </Row>
-
-
-
           </Col>
         </Row>
         <Row type="flex" justify="center">
           <Button type="primary" onClick={this.handleGenerateEggs}>
             RNGenerate!
-        </Button>
+          </Button>
         </Row>
 
         {/* 
