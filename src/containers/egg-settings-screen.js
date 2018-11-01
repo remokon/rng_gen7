@@ -1,4 +1,4 @@
-import { Card, Col, Input, Row, Select, InputNumber } from 'antd';
+import { Card, Col, Input, Row, Select, InputNumber, Radio, Divider, Checkbox, Button } from 'antd';
 import { generateEggs } from 'gen7rng';
 import { filter, join, map, parseInt, partial, reverse } from 'lodash-es';
 import React, { Component } from 'react';
@@ -6,18 +6,21 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { setEggSettingProperty } from '../actions/eggSettings';
 import { changeScreen, setEggSetting, setRNGResults } from '../store/dispatchers';
-import { parseIVList, parseSeedList } from '../utils/parse-number-list';
+import { parseList, parseIVList, parseSeedList } from '../utils/parse-number-list';
 import { pokemonFilter } from '../utils/pokemon-filters';
 
 const stats = ['HP', 'Atk', 'Def', 'SpA', 'SpD', 'Spe'];
+const seedImg = <img src={"https://www.serebii.net/itemdex/sprites/grassyseed.png"} />
 
 const Option = Select.Option;
+const RadioGroup = Radio.Group;
 
 class EggSettings extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      st_femaleIVs: [31, 31, 31, 31, 31, 31]
+      st_femaleIVs: [31, 31, 31, 31, 31, 31],
+      st_maleIVs: [31, 31, 31, 31, 31, 31]
     };
   }
 
@@ -31,6 +34,20 @@ class EggSettings extends Component {
       },
       () => {
         setEggSettingProperty('femaleIVs', this.state.st_femaleIVs.join('/'));
+      }
+    );
+  };
+
+  modifyMaleIvs = (index, value) => {
+    const { setEggSettingProperty } = this.props;
+    let modified_array = [...this.state.st_maleIVs];
+    modified_array[index] = value;
+    this.setState(
+      {
+        st_maleIVs: modified_array
+      },
+      () => {
+        setEggSettingProperty('maleIVs', this.state.st_maleIVs.join('/'));
       }
     );
   };
@@ -135,8 +152,10 @@ class EggSettings extends Component {
       <div>
         <Row gutter={16}>
           <Col xs={24} sm={24} md={24} lg={12} xl={12}>
-            <Card title="🌱 Egg seed 🌱">
+            {/* <Card> */}
+            <Card title={<span> {seedImg} &nbsp; — Enter your seed — &nbsp; {seedImg} </span>}>
               <Input
+                style={{ fontFamily: "monospace" }}
                 placeholder="Egg seeds"
                 onChange={e => setEggSettingProperty('eggSeeds', parseSeedList(e.target.value))}
                 value={join(eggSeeds, ', ').toUpperCase()}
@@ -146,182 +165,236 @@ class EggSettings extends Component {
             </Card>
           </Col>
         </Row>
+
         <Row gutter={16} style={{ marginTop: '16px' }}>
-          <Col xs={12} sm={12} md={12} lg={12} xl={12}>
-            <Card title="Female">
-              <p>
-                <img src={'https://www.serebii.net/pokedex-sm/icon/241.png'} />
+
+
+
+          <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+            <Card title="Parents Info">
+              <RadioGroup
+                value={genderRatio}
+                onChange={e => setEggSettingProperty('genderRatio', e.target.value)}
+              >
+                <Radio value={'Female only'}> F only</Radio>
+                <Radio value={'7:1'}> 7:1 </Radio>
+                <Radio value={'3:1'}> 3:1 </Radio>
+                <Radio value={'1:1'}> 1:1 </Radio>
+                <Radio value={'1:3'}> 1:3 </Radio>
+                <Radio value={'1:7'}> 1:7 </Radio>
+                <Radio value={'Male only'}> M only </Radio>
+                <Radio value={'Genderless'}> Genderless </Radio>
+
+              </RadioGroup>
+              <Divider></Divider>
+              <Col xs={10} sm={10} md={10} lg={5} xl={5}>
+                <p>
+                  <img src={'https://www.serebii.net/pokedex-sm/icon/031.png'} /> — &nbsp; ♀
               </p>
-              <Select style={{ width: '100%' }} defaultValue={femaleAbility} onChange={saveSetting('femaleAbility')}>
-                <Option value="1">1</Option>
-                <Option value="2">2</Option>
-                <Option value="H">H</Option>
-              </Select>
-              <p className="input_lable">Female Item</p>
-              <Select style={{ width: '100%' }} defaultValue={femaleItem} onChange={saveSetting('femaleItem')}>
-                {[
-                  { name: 'None' },
-                  { name: 'Everstone' },
-                  { name: 'Destiny Knot' },
-                  { name: 'Power Weight' },
-                  { name: 'Power Bracer' },
-                  { name: 'Power Belt' },
-                  { name: 'Power Lens' },
-                  { name: 'Power Band' },
-                  { name: 'Power Anklet' }
-                ].map((o, i) => (
-                  <Option key={i} value={o.name}>
-                    {o.name}
-                  </Option>
-                ))}
-              </Select>
-              <p className="input_lable">Female IVs</p>
-              {this.state.st_femaleIVs.map((o, i) => {
-                return (
-                  <Row key={i}>
-                    <Col style={{ marginBottom: '8px' }} xs={8} sm={8} md={8} lg={8} xl={8}>
-                      <InputNumber
+                <Select style={{ width: '40%' }} defaultValue={femaleAbility} onChange={saveSetting('femaleAbility')}>
+                  <Option value="1">1</Option>
+                  <Option value="2">2</Option>
+                  <Option value="H">H</Option>
+                </Select>
+                {/* <p className="input_lable">Female Item</p> */}
+                <Select style={{ width: '85%' }} defaultValue={femaleItem} onChange={saveSetting('femaleItem')}>
+                  {[
+                    { name: 'None' },
+                    { name: 'Everstone' },
+                    { name: 'Destiny Knot' },
+                    { name: 'Power Weight' },
+                    { name: 'Power Bracer' },
+                    { name: 'Power Belt' },
+                    { name: 'Power Lens' },
+                    { name: 'Power Band' },
+                    { name: 'Power Anklet' }
+                  ].map((o, i) => (
+                    <Option key={i} value={o.name}>
+                      {o.name}
+                    </Option>
+                  ))}
+                </Select>
+                <p></p>
+                {this.state.st_femaleIVs.map((o, i) => {
+                  return (
+                    <Row key={i}>
+                      <Col style={{ marginBottom: '2px' }} xs={8} sm={8} md={8} lg={8} xl={8}>
+                        <InputNumber
+                          style={{ fontFamily: "monospace" }}
+                          min={0}
+                          max={31}
+                          onChange={value => this.modifyFemaleIvs(i, value)}
+                          value={o}
+                          required
+                        />
+                      </Col>
+                      {/* <Col style={{ marginBottom: '8px' }} xs={16} sm={16} md={16} lg={16} xl={16}>
+                      <p style={{ marginLeft: '16px' }}>{stats[i]}</p>
+                    </Col> */}
+                    </Row>
+                  );
+                })}
+              </Col>
+              <Col xs={2} sm={2} md={2} lg={1} xl={1}>
+                <Row gutter={16} style={{ marginTop: '16px' }}> &nbsp; </Row>
+                <Row justify={"center"} gutter={16} style={{ marginTop: '12px' }}><img src={'https://serebii.net/itemdex/sprites/abilitycapsule.png'} /></Row>
+                <Row justify={"center"} gutter={16} style={{ marginTop: '8px' }}><img src={'https://www.serebii.net/itemdex/gsitem.png'} /></Row>
+                {/* <Row gutter={16} style={{ marginTop: '24px' }}>HP</Row>        
+                <Row gutter={16} style={{ marginTop: '14px' }}>Atk</Row>        
+                <Row gutter={16} style={{ marginTop: '14px' }}>Def</Row>        
+                <Row gutter={16} style={{ marginTop: '14px' }}>SpA</Row>        
+                <Row gutter={16} style={{ marginTop: '14px' }}>SpD</Row>        
+                <Row gutter={16} style={{ marginTop: '14px' }}>Spe</Row>         */}
+              </Col>
+              <Col xs={10} sm={10} md={10} lg={5} xl={5}>
+                <p>
+                  <img src={'https://www.serebii.net/pokedex-sm/icon/034.png'} /> — &nbsp; ♂
+              </p>
+                <Select style={{ width: '40%' }} defaultValue={maleAbility} onChange={saveSetting('maleAbility')}>
+                  <Option value="1">1</Option>
+                  <Option value="2">2</Option>
+                  <Option value="H">H</Option>
+                </Select>
+                {/* <p className="input_lable">Male Item</p> */}
+                <Select style={{ width: '85%' }} defaultValue={maleItem} onChange={saveSetting('maleItem')}>
+                  {[
+                    { name: 'None' },
+                    { name: 'Everstone' },
+                    { name: 'Destiny Knot' },
+                    { name: 'Power Weight' },
+                    { name: 'Power Bracer' },
+                    { name: 'Power Belt' },
+                    { name: 'Power Lens' },
+                    { name: 'Power Band' },
+                    { name: 'Power Anklet' }
+                  ].map((o, i) => (
+                    <Option key={i} value={o.name}>
+                      {o.name}
+                    </Option>
+                  ))}
+                </Select>
+                <p></p>
+                {this.state.st_maleIVs.map((o, i) => {
+                  return (
+                    <Row key={i}>
+                      <Col style={{ marginBottom: '2px' }} xs={8} sm={8} md={8} lg={8} xl={8}>
+                        <InputNumber
+                          style={{ fontFamily: "monospace" }}
+                          min={0}
+                          max={31}
+                          onChange={value => this.modifyMaleIvs(i, value)}
+                          value={o}
+                          required
+                        />
+                      </Col>
+                      {/* <Col style={{ marginBottom: '8px' }} xs={16} sm={16} md={16} lg={16} xl={16}>
+                      <p style={{ marginLeft: '24px' }}>{stats[i]}</p>
+                    </Col> */}
+                    </Row>
+                  );
+                })}
+
+              </Col>
+
+            </Card>
+
+          </Col>
+
+        </Row>
+
+        <Row gutter={16} style={{ marginTop: '16px' }}>
+          <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+
+            <Card title="Shinies ✨">
+              <Col xs={12} sm={12} md={12} lg={6} xl={6}>
+                <p> Your TSV: &nbsp;
+              <InputNumber
+                    style={{ fontFamily: "monospace" }}
+                    min={0}
+                    max={4096}
+                    placeholder={2925}
+                    onChange={saveSetting('playerTSV')}
+                    value={playerTSV}
+                  />
+                </p>
+              </Col>
+              <Col xs={12} sm={12} md={12} lg={6} xl={6}>
+                <p> Other TSVs: &nbsp;
+              <Input
+                    style={{ fontFamily: "monospace", width: "70%" }}
+                    onChange={tsvList => saveSetting('otherTSVs')(parseList(4, ',', tsvList.target.value))}
+                    value={otherTSVs}
+                  />
+                </p>
+              </Col>
+
+
+
+              <Row >
+                <Col>
+                  <Checkbox
+                    checked={masudaMethod}
+                    onChange={e => setEggSettingProperty('masudaMethod', e.target.checked)}
+                  >
+                    Masuda Method
+                  </Checkbox>
+                  <Checkbox
+                    checked={shinyCharm}
+                    onChange={e => setEggSettingProperty('shinyCharm', e.target.checked)}
+                  >
+                    Shiny Charm
+                  </Checkbox>
+                </Col>
+              </Row>
+
+
+
+            </Card>
+
+            <Row gutter={16} style={{ marginTop: '16px' }}>
+              <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+                <Card title="Results filters">
+                  <Col>
+                    <p> # perfect IVs: &nbsp;
+                  <InputNumber
                         min={0}
-                        max={31}
-                        onChange={value => this.modifyFemaleIvs(i, value)}
-                        value={o}
+                        max={6}
+                        style={{ fontFamily: "monospace" }}
+                        onChange={e => setEggSettingProperty('perfectIVFilter', e)}
+                        value={perfectIVFilter}
+                      />
+                    </p>
+
+                  </Col>
+                  <Col>
+                    <p>
+                      Frames upper limit: &nbsp;
+                  <Input
+                        style={{ fontFamily: "monospace", width: "20%" }}
+                        placeholder={400}
+                        onChange={e => setEggSettingProperty('framesToGenerate', e.target.value)}
+                        value={framesToGenerate}
                         required
                       />
-                    </Col>
-                    <Col style={{ marginBottom: '8px' }} xs={16} sm={16} md={16} lg={16} xl={16}>
-                      <p style={{ marginLeft: '16px' }}>{stats[i]}</p>
-                    </Col>
-                  </Row>
-                );
-              })}
-            </Card>
+                    </p>
+                  </Col>
+                </Card>
+
+              </Col>
+            </Row>
+
+
+
           </Col>
+        </Row>
+        <Row type="flex" justify="center">
+          <Button type="primary" onClick={this.handleGenerateEggs}>
+            RNGenerate!
+        </Button>
         </Row>
 
         {/* 
-            <RadioGroup
-              label="Female IVs"
-              value={femaleIVs}
-              options={[
-                { label: '31/31/31/31/31/31', value: '31/31/31/31/31/31' },
-                { label: '31/00/31/31/31/31', value: '31/00/31/31/31/31' },
-                { label: '31/31/31/31/31/00', value: '31/31/31/31/31/00' }
-              ]}
-              onChange={saveSetting('femaleIVs')}
-            />
-            <TextInputField
-              label="Custom IVs"
-              placeholder="Custom IVs"
-              onChange={saveSetting('femaleIVs')}
-              value={join(parseList(2, '/', femaleIVs), '/')}
-            />
-          </Pane>
-  
-          <Pane margin={8}>
-            <img src={'https://www.serebii.net/pokedex-sm/icon/128.png'} />
-  
-            <Combobox
-              width={120}
-              label="Male Ability"
-              value={maleAbility}
-              // defaultSelectedItem={'1'}
-              placeholder={'♂ Ability'}
-              items={['1', '2', 'H']}
-              onChange={saveSetting('maleAbility')}
-            />
-            <Combobox
-              width={120}
-              label="Male Item"
-              value={maleItem}
-              // defaultSelectedItem={'1'}
-              placeholder={'♂ Item'}
-              items={[
-                'None',
-                'Everstone',
-                'Destiny Knot',
-                'Power Weight',
-                'Power Bracer',
-                'Power Belt',
-                'Power Lens',
-                'Power Band',
-                'Power Anklet'
-              ]}
-              onChange={saveSetting('maleItem')}
-            />
-            <RadioGroup
-              label="Male Item"
-              value={maleItem}
-              options={[
-                { label: 'None', value: 'None' },
-                { label: 'Everstone', value: 'Everstone' },
-                { label: 'Destiny Knot', value: 'Destiny Knot' },
-                { label: 'Power Weight', value: 'Power Weight' },
-                { label: 'Power Bracer', value: 'Power Bracer' },
-                { label: 'Power Belt', value: 'Power Belt' },
-                { label: 'Power Lens', value: 'Power Lens' },
-                { label: 'Power Band', value: 'Power Band' },
-                { label: 'Power Anklet', value: 'Power Anklet' }
-              ]}
-              onChange={saveSetting('maleItem')}
-            />
-            <RadioGroup
-              label="Male IVs"
-              value={maleIVs}
-              options={[
-                { label: '31/31/31/31/31/31', value: '31/31/31/31/31/31' },
-                { label: '31/00/31/31/31/31', value: '31/00/31/31/31/31' },
-                { label: '31/31/31/31/31/00', value: '31/31/31/31/31/00' }
-              ]}
-              onChange={saveSetting('maleIVs')}
-            />
-            <TextInputField
-              label="Custom IVs"
-              placeholder="Custom IVs"
-              onChange={saveSetting('maleIVs')}
-              value={join(parseList(2, '/', maleIVs), '/')}
-            />
-  
-            <RadioGroup
-              label="Gender Ratio (F:M)"
-              value={genderRatio}
-              options={[
-                { label: 'Genderless', value: 'Genderless' },
-                { label: '1:1', value: '1:1' },
-                { label: '7:1', value: '7:1' },
-                { label: '3:1', value: '3:1' },
-                { label: '1:3', value: '1:3' },
-                { label: '1:7', value: '1:7' },
-                { label: 'Male only', value: 'Male only' },
-                { label: 'Female only', value: 'Female only' }
-              ]}
-              onChange={saveSetting('genderRatio')}
-            />
-          </Pane>
-  
-          <Pane margin={8}>
-            <TextInputField
-              label="Your TSV ✨"
-              placeholder="Your TSV"
-              onChange={e => setEggSettingProperty('playerTSV', parseInt(e.target.value))}
-              value={playerTSV}
-            />
-            <TextInputField
-              label="Other TSVs"
-              placeholder="Other TSVs"
-              onChange={tsvList => saveSetting('otherTSVs')(parseList(4, ', ', tsvList))}
-              value={join(otherTSVs, ', ')}
-            />
-            <Checkbox
-              label="Masuda Method"
-              checked={masudaMethod}
-              onChange={e => setEggSettingProperty('masudaMethod', e.target.checked)}
-            />
-            <Checkbox
-              label="Shiny Charm"
-              checked={shinyCharm}
-              onChange={e => setEggSettingProperty('shinyCharm', e.target.checked)}
-            />
-          </Pane>
+            
   
           <Pane margin={8}>
             <TextInputField

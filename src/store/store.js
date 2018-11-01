@@ -41,7 +41,7 @@ export const store = createStore(
       nidoType: false,
       otherTSVs: [],
       perfectIVFilter: '0',
-      playerTSV: 0,
+      playerTSV: 2925,
       sameDexNumber: false,
       shinyCharm: false
     },
