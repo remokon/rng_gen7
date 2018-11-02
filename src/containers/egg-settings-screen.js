@@ -10,7 +10,7 @@ import { parseList, parseIVList, parseSeedList } from '../utils/parse-number-lis
 import { pokemonFilter } from '../utils/pokemon-filters';
 
 const stats = ['HP', 'Atk', 'Def', 'SpA', 'SpD', 'Spe'];
-const seedImg = <img src={'https://www.serebii.net/itemdex/sprites/grassyseed.png'} />;
+const seedImg = <img alt="" src={"https://www.serebii.net/itemdex/sprites/grassyseed.png"} />
 
 const Option = Select.Option;
 const RadioGroup = Radio.Group;
@@ -157,7 +157,7 @@ class EggSettings extends Component {
               title={
                 <span>
                   {' '}
-                  {seedImg} &nbsp; — Enter your seed — &nbsp; {seedImg}{' '}
+                  Seed {' '} {seedImg}
                 </span>
               }
             >
@@ -175,8 +175,21 @@ class EggSettings extends Component {
 
         <Row gutter={16} style={{ marginTop: '16px' }}>
           <Col xs={24} sm={24} md={24} lg={12} xl={12}>
-            <Card title="Parents Info">
-              <RadioGroup value={genderRatio} onChange={e => setEggSettingProperty('genderRatio', e.target.value)}>
+            
+            <Card 
+              title={
+                <span>
+                  {' '}
+                  Parents info
+                  <img alt="" src={"https://www.serebii.net/itemdex/sprites/sweetheart.png"}/>
+                  {' '}
+                </span>
+              }
+            >
+              <RadioGroup
+                value={genderRatio}
+                onChange={e => setEggSettingProperty('genderRatio', e.target.value)}
+              >
                 <Radio value={'Female only'}> F only</Radio>
                 <Radio value={'7:1'}> 7:1 </Radio>
                 <Radio value={'3:1'}> 3:1 </Radio>
@@ -189,8 +202,8 @@ class EggSettings extends Component {
               <Divider />
               <Col xs={10} sm={10} md={10} lg={5} xl={5}>
                 <p>
-                  <img src={'https://www.serebii.net/pokedex-sm/icon/031.png'} /> — &nbsp; ♀
-                </p>
+                  <img alt="" src={'https://www.serebii.net/pokedex-sm/icon/031.png'} /> — &nbsp; ♀
+              </p>
                 <Select style={{ width: '40%' }} defaultValue={femaleAbility} onChange={saveSetting('femaleAbility')}>
                   <Option value="1">1</Option>
                   <Option value="2">2</Option>
@@ -236,16 +249,9 @@ class EggSettings extends Component {
                 })}
               </Col>
               <Col xs={2} sm={2} md={2} lg={1} xl={1}>
-                <Row gutter={16} style={{ marginTop: '16px' }}>
-                  {' '}
-                  &nbsp;{' '}
-                </Row>
-                <Row justify={'center'} gutter={16} style={{ marginTop: '12px' }}>
-                  <img src={'https://serebii.net/itemdex/sprites/abilitycapsule.png'} />
-                </Row>
-                <Row justify={'center'} gutter={16} style={{ marginTop: '8px' }}>
-                  <img src={'https://www.serebii.net/itemdex/gsitem.png'} />
-                </Row>
+                <Row gutter={16} style={{ marginTop: '16px' }}> &nbsp; </Row>
+                <Row justify={"center"} gutter={16} style={{ marginTop: '12px' }}><img alt="" src={'https://serebii.net/itemdex/sprites/abilitycapsule.png'} /></Row>
+                <Row justify={"center"} gutter={16} style={{ marginTop: '8px' }}><img alt="" src={'https://www.serebii.net/itemdex/gsitem.png'} /></Row>
                 {/* <Row gutter={16} style={{ marginTop: '24px' }}>HP</Row>        
                 <Row gutter={16} style={{ marginTop: '14px' }}>Atk</Row>        
                 <Row gutter={16} style={{ marginTop: '14px' }}>Def</Row>        
@@ -255,7 +261,7 @@ class EggSettings extends Component {
               </Col>
               <Col xs={10} sm={10} md={10} lg={5} xl={5}>
                 <p>
-                  <img src={'https://www.serebii.net/pokedex-sm/icon/034.png'} /> — &nbsp; ♂
+                  <img alt="" src={'https://www.serebii.net/pokedex-sm/icon/034.png'} /> — &nbsp; ♂
                 </p>
                 <Select style={{ width: '40%' }} defaultValue={maleAbility} onChange={saveSetting('maleAbility')}>
                   <Option value="1">1</Option>
@@ -301,40 +307,70 @@ class EggSettings extends Component {
                   );
                 })}
               </Col>
+              <Col>
+                <Checkbox
+                  checked={isFemaleDitto}
+                  onChange={e => setEggSettingProperty('isFemaleDitto', e.target.checked)}
+                >
+                  Breeding with Ditto
+                </Checkbox>
+              </Col>
+              <Col>
+                <Checkbox
+                  checked={nidoType}
+                  onChange={e => setEggSettingProperty('nidoType', e.target.checked)}
+                >
+                  Parents are Nidoran
+                </Checkbox>
+              </Col>
+              <Col>
+                <Checkbox
+                  checked={sameDexNumber}
+                  onChange={e => setEggSettingProperty('sameDexNumber', e.target.checked)}
+                >
+                  Parents are the same species
+                </Checkbox>
+              </Col>
+
             </Card>
           </Col>
         </Row>
 
         <Row gutter={16} style={{ marginTop: '16px' }}>
           <Col xs={24} sm={24} md={24} lg={12} xl={12}>
-            <Card title="Shinies ✨">
-              <Col xs={12} sm={12} md={12} lg={6} xl={6}>
-                <p>
+            <Card
+              title={
+                <span>
                   {' '}
-                  Your TSV: &nbsp;
+                  Shinies 
+                  {' '}
+                  <img alt="" src={"https://cdn.bulbagarden.net/upload/a/a5/ShinyVIIStar.png"}/>
+                </span>
+              }
+            >
+            
+              <Col xs={12} sm={12} md={12} lg={6} xl={6}>
+                <p> Your TSV: &nbsp;
                   <InputNumber
-                    style={{ fontFamily: 'monospace' }}
+                    style={{ fontFamily: "monospace" }}
                     min={0}
                     max={4096}
-                    placeholder={2925}
+                    placeholder={1000}
                     onChange={saveSetting('playerTSV')}
                     value={playerTSV}
                   />
                 </p>
               </Col>
               <Col xs={12} sm={12} md={12} lg={6} xl={6}>
-                <p>
-                  {' '}
-                  Other TSVs: &nbsp;
+                <p> Other TSVs: {' '}
                   <Input
-                    style={{ fontFamily: 'monospace', width: '70%' }}
+                    style={{ fontFamily: "monospace", width: "50%"}}
                     onChange={tsvList => saveSetting('otherTSVs')(parseList(4, ',', tsvList.target.value))}
                     value={otherTSVs}
                   />
                 </p>
               </Col>
-
-              <Row>
+              {/* <Row > */}
                 <Col>
                   <Checkbox
                     checked={masudaMethod}
@@ -346,12 +382,36 @@ class EggSettings extends Component {
                     Shiny Charm
                   </Checkbox>
                 </Col>
-              </Row>
+              {/* </Row> */}
+
+
+
             </Card>
 
             <Row gutter={16} style={{ marginTop: '16px' }}>
               <Col xs={24} sm={24} md={24} lg={12} xl={12}>
-                <Card title="Results filters">
+                <Card 
+                 title={
+                  <span>
+                    {' '}
+                    Filter results 
+                    {' '}
+                    <img alt="" src={"https://www.serebii.net/pokedex-sm/icon/306-m.png"}/>
+                  </span>
+                  }
+                >
+                  <Col>
+                    <p>
+                      Frames upper limit: &nbsp;
+                      <Input
+                        style={{ fontFamily: 'monospace', width: '20%' }}
+                        placeholder={400}
+                        onChange={e => setEggSettingProperty('framesToGenerate', e.target.value)}
+                        value={framesToGenerate}
+                        required
+                      />
+                    </p>
+                  </Col>
                   <Col>
                     <p>
                       {' '}
@@ -367,23 +427,64 @@ class EggSettings extends Component {
                   </Col>
                   <Col>
                     <p>
-                      Frames upper limit: &nbsp;
+                      Upper IV limits: {' '}
                       <Input
-                        style={{ fontFamily: 'monospace', width: '20%' }}
-                        placeholder={400}
-                        onChange={e => setEggSettingProperty('framesToGenerate', e.target.value)}
-                        value={framesToGenerate}
-                        required
+                        style={{ fontFamily: 'monospace'}}
+                        onChange={e => setEggSettingProperty('ivFilterUpper', e.target.value)}
+                        value={join(parseList(2, '/', ivFilterUpper), '/')}
                       />
                     </p>
                   </Col>
+                  <Col>
+                    <p>
+                      Lower limit IVs: {' '}
+                      <Input
+                        style={{ fontFamily: 'monospace'}}
+                        placeholder="Lower limit IVs"
+                        onChange={e => setEggSettingProperty('ivFilterLower', e.target.value)}
+                        value={join(parseList(2, '/', ivFilterLower), '/')}
+                      />
+                    </p>
+                  </Col>
+                  <Col>
+                    <p>
+                      Gender: &nbsp;
+                      <RadioGroup
+                        value={genderFilter}
+                        onChange={e => setEggSettingProperty('genderFilter', e.target.value)}
+                        >
+                          <Radio value={'No Gender'}>Any</Radio>
+                          <Radio value={'Male'}> Male </Radio>
+                          <Radio value={'Female'}> Female </Radio>
+                          <Radio value={'Genderless'}> Genderless </Radio>
+                      </RadioGroup >
+                    </p>
+                  </Col>
+                  <Col>
+                    <Checkbox
+                      checked={filterShinies}
+                      onChange={e => setEggSettingProperty('filterShinies', e.target.checked)}
+                    >
+                     Filter shinies 
+                    </Checkbox>
+                  </Col>
+                  <Col>
+                    <Checkbox
+                      checked={applyFilters}
+                      onChange={e => setEggSettingProperty('applyFilters', e.target.checked)}
+                    >
+                      Apply all filters 
+                    </Checkbox>
+                  </Col>
+
+
                 </Card>
               </Col>
             </Row>
           </Col>
         </Row>
-        <Row type="flex" justify="center">
-          <Button type="primary" onClick={this.handleGenerateEggs}>
+        <Row type='flex' justify='center'>
+          <Button type='primary' onClick={this.handleGenerateEggs}>
             RNGenerate!
           </Button>
         </Row>
@@ -404,77 +505,7 @@ class EggSettings extends Component {
               onChange={saveSetting('ivFilterLower')}
               value={join(parseList(2, '/', ivFilterLower), '/')}
             />
-            <TextInputField
-              label="Perfect IVs"
-              placeholder="Perfect IVs"
-              onChange={e => setEggSettingProperty('perfectIVFilter', e.target.value)}
-              value={perfectIVFilter}
-            />
           </Pane>
-  
-          <Pane margin={8}>
-            <RadioGroup
-              label="Gender filter"
-              value={genderFilter}
-              options={[
-                { label: 'No Gender', value: 'No Gender' },
-                { label: 'Genderless', value: 'Genderless' },
-                { label: 'Male', value: 'Male' },
-                { label: 'Female', value: 'Female' }
-              ]}
-              onChange={saveSetting('genderFilter')}
-            />
-  
-            <Checkbox
-              label="Filter Shinies"
-              checked={filterShinies}
-              onChange={e => setEggSettingProperty('filterShinies', e.target.checked)}
-            />
-  
-            <Checkbox
-              label="Shiny Charm"
-              checked={shinyCharm}
-              onChange={e => setEggSettingProperty('shinyCharm', e.target.checked)}
-            />
-            <Checkbox
-              label="Apply Filters"
-              checked={applyFilters}
-              onChange={e => setEggSettingProperty('applyFilters', e.target.checked)}
-            />
-          </Pane>
-  
-          <Pane margin={8}>
-            <Text size={500}>Misc Settings</Text>
-            <Checkbox
-              label="Parents are Nidoran"
-              checked={nidoType}
-              onChange={e => setEggSettingProperty('nidoType', e.target.checked)}
-            />
-            <Checkbox
-              label="Parents the same species"
-              checked={sameDexNumber}
-              onChange={e => setEggSettingProperty('sameDexNumber', e.target.checked)}
-            />
-            <Checkbox
-              label="The female is Ditto"
-              checked={isFemaleDitto}
-              onChange={e => setEggSettingProperty('isFemaleDitto', e.target.checked)}
-            />
-          </Pane>
-  
-        
-            <TextInputField
-              label="Frames upper limit"
-              placeholder="400"
-              onChange={e => setEggSettingProperty('framesToGenerate', e.target.value)}
-              value={framesToGenerate}
-              required
-            />
-        
-          
-            <Button appearance="primary" iconAfter="double-chevron-right" onClick={this.handleGenerateEggs}>
-              RNGenerate!
-            </Button>
           </Pane> 
         */}
       </div>
