@@ -9,7 +9,7 @@ import { changeScreen, setEggSetting, setRNGResults } from '../store/dispatchers
 import { parseList, parseIVList, parseSeedList } from '../utils/parse-number-list';
 import { pokemonFilter } from '../utils/pokemon-filters';
 
-const stats = ['HP', 'Atk', 'Def', 'SpA', 'SpD', 'Spe'];
+// const stats = ['HP', 'Atk', 'Def', 'SpA', 'SpD', 'Spe'];
 const seedImg = <img alt="" src={"https://www.serebii.net/itemdex/sprites/grassyseed.png"} />
 
 const Option = Select.Option;
@@ -57,6 +57,7 @@ class EggSettings extends Component {
 
     const {
       applyFilters,
+      ball,
       eggSeeds,
       femaleAbility,
       femaleItem,
@@ -119,6 +120,7 @@ class EggSettings extends Component {
 
     const {
       applyFilters,
+      ball,
       eggSeeds,
       femaleAbility,
       femaleItem,
@@ -190,6 +192,7 @@ class EggSettings extends Component {
                 value={genderRatio}
                 onChange={e => setEggSettingProperty('genderRatio', e.target.value)}
               >
+                <Radio value={'Genderless'}> Genderless </Radio>
                 <Radio value={'Female only'}> F only</Radio>
                 <Radio value={'7:1'}> 7:1 </Radio>
                 <Radio value={'3:1'}> 3:1 </Radio>
@@ -197,7 +200,6 @@ class EggSettings extends Component {
                 <Radio value={'1:3'}> 1:3 </Radio>
                 <Radio value={'1:7'}> 1:7 </Radio>
                 <Radio value={'Male only'}> M only </Radio>
-                <Radio value={'Genderless'}> Genderless </Radio>
               </RadioGroup>
               <Divider />
               <Col xs={10} sm={10} md={10} lg={5} xl={5}>
@@ -378,6 +380,8 @@ class EggSettings extends Component {
                   >
                     Masuda Method
                   </Checkbox>
+                  </Col>
+                  <Col>
                   <Checkbox checked={shinyCharm} onChange={e => setEggSettingProperty('shinyCharm', e.target.checked)}>
                     Shiny Charm
                   </Checkbox>
@@ -483,6 +487,7 @@ class EggSettings extends Component {
             </Row>
           </Col>
         </Row>
+        <br/>
         <Row type='flex' justify='center'>
           <Button type='primary' onClick={this.handleGenerateEggs}>
             RNGenerate!

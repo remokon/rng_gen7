@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 // import { EggResult } from '../components/egg-result';
 // import { StationaryResult } from '../components/stationary-result';
 import { parseHexSeed } from '../utils/parse-hex-seed';
-import { Table, Divider, Tag } from 'antd';
+import { calcHP } from '../utils/calc-hp';
+import { Table } from 'antd';
 
 // const handleResultType = resultType => {
 //   switch (resultType) {
@@ -18,7 +19,7 @@ import { Table, Divider, Tag } from 'antd';
 // };
 
 export const Results = ({ rngResults }) => {
-  const { results, type } = rngResults;
+  const { results } = rngResults;
   // const resultType = handleResultType(type);
   console.log(rngResults);
 
@@ -44,35 +45,85 @@ export const Results = ({ rngResults }) => {
     {
       title: 'Frame',
       dataIndex: 'frame',
-      key: 'frame'
+    },
+    {
+      title: 'Adv',
+      dataIndex: 'frameAdvance',
+      render: frameAdvance => `+${frameAdvance}`
+    },
+    {
+      title: 'Nature',
+      dataIndex: 'egg.nature',
+    },
+    {
+      title: 'HP',
+      dataIndex: 'egg.ivs.0',
+    },
+    {
+      title: 'Atk',
+      dataIndex: 'egg.ivs.1',
+    },
+    {
+      title: 'Def',
+      dataIndex: 'egg.ivs.2',
+    },
+    {
+      title: 'SpA',
+      dataIndex: 'egg.ivs.3',
+    },
+    {
+      title: 'SpD',
+      dataIndex: 'egg.ivs.4',
+    },
+    {
+      title: 'Spe',
+      dataIndex: 'egg.ivs.5',
+    },
+    {
+      title: 'Gender',
+      dataIndex: 'egg.gender',
+    },
+    {
+      title: 'Ability',
+      dataIndex: 'egg.ability',
+    },
+    {
+      title: 'Hidden Power',
+      dataIndex: 'egg.ivs',
+      render: eggIvs => calcHP(eggIvs)
+    },
+    {
+      title: 'Ball',
+      dataIndex: 'egg.ball',
+    },
+    {
+      title: 'PSV',
+      dataIndex: 'egg.psv',
+    },
+    {
+      title: 'Egg seeds',
+      dataIndex: 'eggSeeds',
+      render: eggSeeds => join(map(reverse([...eggSeeds]), parseHexSeed), ', ')
     }
   ];
 
   return (
     <div>
-      <Table columns={columns} dataSource={results} />
-      {/* <Pane
-        display="flex"
-        padding={16}
-        display="flex"
-        justifyContent="space-between"
-        flexDirection="row"
-        flexWrap="wrap"
-      >
+      <Table
+       columns={columns} 
+       dataSource={results} 
+       size='small'
+       rowKey={'frame'}
+       pagination={{ pageSize: 20 }}
+      //  rowClassName={ (record, index) => 
+      //   {
+      //     return record.egg.shiny ? 'shinyCell' : ''
+      //   }
+      // }
+      />
+      {/* 
         <Table width="100vw">
           <Table.Head>
-            <Table.TextHeaderCell>Frame</Table.TextHeaderCell>
-            <Table.TextHeaderCell>Adv</Table.TextHeaderCell>
-            <Table.TextHeaderCell>Nature</Table.TextHeaderCell>
-            <Table.TextHeaderCell>HP</Table.TextHeaderCell>
-            <Table.TextHeaderCell>Atk</Table.TextHeaderCell>
-            <Table.TextHeaderCell>Def</Table.TextHeaderCell>
-            <Table.TextHeaderCell>SpA</Table.TextHeaderCell>
-            <Table.TextHeaderCell>SpD</Table.TextHeaderCell>
-            <Table.TextHeaderCell>Spe</Table.TextHeaderCell>
-            <Table.TextHeaderCell>Gender</Table.TextHeaderCell>
-            <Table.TextHeaderCell>Ability</Table.TextHeaderCell>
-            <Table.TextHeaderCell>Psv</Table.TextHeaderCell>
             <Table.TextHeaderCell flexBasis={'314px'}>Seed</Table.TextHeaderCell>
           </Table.Head>
           <Table.Body>
