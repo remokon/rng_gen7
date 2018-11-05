@@ -31,15 +31,23 @@ const perfectIVFilter = (desiredPerfectIVs, { ivs }) => {
 };
 
 const genderFilter = (desiredGender, { gender }) => {
-  return isEqual(desiredGender, 'No Gender') || isEqual(desiredGender, gender);
+  if (isEqual(desiredGender, 'Any')) {
+    return true
+  }
+  return isEqual(desiredGender, gender);
+};
+
+const abilityFilter = (desiredAbility, { ability }) => {
+  return isEqual(desiredAbility, 'Any') || isEqual(desiredAbility, ability);
 };
 
 export const pokemonFilter = (
   upperIVs,
   lowerIVs,
-  isShinyFilter,
-  desiredPerfectIVs,
   desiredGender,
+  desiredPerfectIVs,
+  isShinyFilter,
+  desiredAbility,
   selector,
   rngResult
 ) => {
@@ -48,8 +56,9 @@ export const pokemonFilter = (
     ivFilter(upperIVs, lowerIVs, pokemon),
     genderFilter(desiredGender, pokemon),
     perfectIVFilter(desiredPerfectIVs, pokemon),
-    shinyFilter(isShinyFilter, pokemon)
+    shinyFilter(isShinyFilter, pokemon),
+    abilityFilter(desiredAbility, pokemon)
   ];
-
+  console.log(filters);
   return reduce(filters, (result, value) => result && value, true);
 };

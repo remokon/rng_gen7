@@ -56,6 +56,7 @@ class EggSettings extends Component {
     const { eggSettings, setSetting, setResults, setScreen, setEggSettingProperty } = this.props;
 
     const {
+      abilityFilter,
       applyFilters,
       ball,
       eggSeeds,
@@ -98,9 +99,10 @@ class EggSettings extends Component {
       pokemonFilter,
       parsedUpper,
       parsedLower,
-      filterShinies,
-      parseInt(perfectIVFilter),
       genderFilter,
+      parseInt(perfectIVFilter),
+      filterShinies,
+      abilityFilter,
       'egg'
     );
     const results = applyFilters ? filter(eggs, isPassingFilters) : eggs;
@@ -119,6 +121,7 @@ class EggSettings extends Component {
     const { eggSettings, setSetting, setResults, setScreen, setEggSettingProperty } = this.props;
 
     const {
+      abilityFilter,
       applyFilters,
       ball,
       eggSeeds,
@@ -145,10 +148,6 @@ class EggSettings extends Component {
     } = eggSettings;
 
     const saveSetting = name => value => setSetting({ name, value });
-
-    // const array_femaleIVs = femaleIVs.split('/');
-
-    console.log(this.state);
 
     return (
       <div>
@@ -177,13 +176,13 @@ class EggSettings extends Component {
 
         <Row gutter={16} style={{ marginTop: '16px' }}>
           <Col xs={24} sm={24} md={24} lg={12} xl={12}>
-            
-            <Card 
+
+            <Card
               title={
                 <span>
                   {' '}
                   Parents info
-                  <img alt="" src={"https://www.serebii.net/itemdex/sprites/sweetheart.png"}/>
+                  <img alt="" src={"https://www.serebii.net/itemdex/sprites/sweetheart.png"} />
                   {' '}
                 </span>
               }
@@ -206,13 +205,13 @@ class EggSettings extends Component {
                 <p>
                   <img alt="" src={'https://www.serebii.net/pokedex-sm/icon/031.png'} /> — &nbsp; ♀
               </p>
-                <Select style={{ width: '40%' }} defaultValue={femaleAbility} onChange={saveSetting('femaleAbility')}>
+                <Select style={{ width: '50%' }} defaultValue={femaleAbility} onChange={saveSetting('femaleAbility')}>
                   <Option value="1">1</Option>
                   <Option value="2">2</Option>
                   <Option value="H">H</Option>
                 </Select>
                 {/* <p className="input_lable">Female Item</p> */}
-                <Select style={{ width: '85%' }} defaultValue={femaleItem} onChange={saveSetting('femaleItem')}>
+                <Select style={{ width: '100%' }} defaultValue={femaleItem} onChange={saveSetting('femaleItem')}>
                   {[
                     { name: 'None' },
                     { name: 'Everstone' },
@@ -344,13 +343,13 @@ class EggSettings extends Component {
               title={
                 <span>
                   {' '}
-                  Shinies 
+                  Shinies
                   {' '}
-                  <img alt="" src={"https://cdn.bulbagarden.net/upload/a/a5/ShinyVIIStar.png"}/>
+                  <img alt="" src={"https://cdn.bulbagarden.net/upload/a/a5/ShinyVIIStar.png"} />
                 </span>
               }
             >
-            
+
               <Col xs={12} sm={12} md={12} lg={6} xl={6}>
                 <p> Your TSV: &nbsp;
                   <InputNumber
@@ -366,128 +365,140 @@ class EggSettings extends Component {
               <Col xs={12} sm={12} md={12} lg={6} xl={6}>
                 <p> Other TSVs: {' '}
                   <Input
-                    style={{ fontFamily: "monospace", width: "50%"}}
+                    style={{ fontFamily: "monospace", width: "50%" }}
                     onChange={tsvList => saveSetting('otherTSVs')(parseList(4, ',', tsvList.target.value))}
                     value={otherTSVs}
                   />
                 </p>
               </Col>
               {/* <Row > */}
-                <Col>
-                  <Checkbox
-                    checked={masudaMethod}
-                    onChange={e => setEggSettingProperty('masudaMethod', e.target.checked)}
-                  >
-                    Masuda Method
+              <Col>
+                <Checkbox
+                  checked={masudaMethod}
+                  onChange={e => setEggSettingProperty('masudaMethod', e.target.checked)}
+                >
+                  Masuda Method
                   </Checkbox>
-                  </Col>
-                  <Col>
-                  <Checkbox checked={shinyCharm} onChange={e => setEggSettingProperty('shinyCharm', e.target.checked)}>
-                    Shiny Charm
+              </Col>
+              <Col>
+                <Checkbox checked={shinyCharm} onChange={e => setEggSettingProperty('shinyCharm', e.target.checked)}>
+                  Shiny Charm
                   </Checkbox>
-                </Col>
+              </Col>
               {/* </Row> */}
 
 
 
             </Card>
-
-            <Row gutter={16} style={{ marginTop: '16px' }}>
-              <Col xs={24} sm={24} md={24} lg={12} xl={12}>
-                <Card 
-                 title={
-                  <span>
-                    {' '}
-                    Filter results 
-                    {' '}
-                    <img alt="" src={"https://www.serebii.net/pokedex-sm/icon/306-m.png"}/>
-                  </span>
-                  }
-                >
-                  <Col>
-                    <p>
-                      Frames upper limit: &nbsp;
-                      <Input
-                        style={{ fontFamily: 'monospace', width: '20%' }}
-                        placeholder={400}
-                        onChange={e => setEggSettingProperty('framesToGenerate', e.target.value)}
-                        value={framesToGenerate}
-                        required
-                      />
-                    </p>
-                  </Col>
-                  <Col>
-                    <p>
-                      {' '}
-                      # perfect IVs: &nbsp;
-                      <InputNumber
-                        min={0}
-                        max={6}
-                        style={{ fontFamily: 'monospace' }}
-                        onChange={e => setEggSettingProperty('perfectIVFilter', e)}
-                        value={perfectIVFilter}
-                      />
-                    </p>
-                  </Col>
-                  <Col>
-                    <p>
-                      Upper IV limits: {' '}
-                      <Input
-                        style={{ fontFamily: 'monospace'}}
-                        onChange={e => setEggSettingProperty('ivFilterUpper', e.target.value)}
-                        value={join(parseList(2, '/', ivFilterUpper), '/')}
-                      />
-                    </p>
-                  </Col>
-                  <Col>
-                    <p>
-                      Lower limit IVs: {' '}
-                      <Input
-                        style={{ fontFamily: 'monospace'}}
-                        placeholder="Lower limit IVs"
-                        onChange={e => setEggSettingProperty('ivFilterLower', e.target.value)}
-                        value={join(parseList(2, '/', ivFilterLower), '/')}
-                      />
-                    </p>
-                  </Col>
-                  <Col>
-                    <p>
-                      Gender: &nbsp;
-                      <RadioGroup
-                        value={genderFilter}
-                        onChange={e => setEggSettingProperty('genderFilter', e.target.value)}
-                        >
-                          <Radio value={'No Gender'}>Any</Radio>
-                          <Radio value={'Male'}> Male </Radio>
-                          <Radio value={'Female'}> Female </Radio>
-                          <Radio value={'Genderless'}> Genderless </Radio>
-                      </RadioGroup >
-                    </p>
-                  </Col>
-                  <Col>
-                    <Checkbox
-                      checked={filterShinies}
-                      onChange={e => setEggSettingProperty('filterShinies', e.target.checked)}
-                    >
-                     Filter shinies 
-                    </Checkbox>
-                  </Col>
-                  <Col>
-                    <Checkbox
-                      checked={applyFilters}
-                      onChange={e => setEggSettingProperty('applyFilters', e.target.checked)}
-                    >
-                      Apply all filters 
-                    </Checkbox>
-                  </Col>
-
-
-                </Card>
-              </Col>
-            </Row>
           </Col>
         </Row>
-        <br/>
+        <Row gutter={16} style={{ marginTop: '16px' }}>
+          <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+            <Card
+              title={
+                <span>
+                  {' '}
+                  Filter results
+                    {' '}
+                  <img alt="" src={"https://www.serebii.net/pokedex-sm/icon/306-m.png"} />
+                </span>
+              }
+            >
+              <Col>
+                <p>
+                  Frames upper limit: &nbsp;
+                      <Input
+                    style={{ fontFamily: 'monospace', width: '20%' }}
+                    placeholder={400}
+                    onChange={e => setEggSettingProperty('framesToGenerate', e.target.value)}
+                    value={framesToGenerate}
+                    required
+                  />
+                </p>
+              </Col>
+              <Col>
+                <p>
+                  {' '}
+                  # perfect IVs: &nbsp;
+                      <InputNumber
+                    min={0}
+                    max={6}
+                    style={{ fontFamily: 'monospace' }}
+                    onChange={e => setEggSettingProperty('perfectIVFilter', e)}
+                    value={perfectIVFilter}
+                  />
+                </p>
+              </Col>
+              <Col>
+                <p>
+                  Upper IV limits: {' '}
+                  <Input
+                    style={{ fontFamily: 'monospace' }}
+                    onChange={e => setEggSettingProperty('ivFilterUpper', e.target.value)}
+                    value={join(parseList(2, '/', ivFilterUpper), '/')}
+                  />
+                </p>
+              </Col>
+              <Col>
+                <p>
+                  Lower limit IVs: {' '}
+                  <Input
+                    style={{ fontFamily: 'monospace' }}
+                    placeholder="Lower limit IVs"
+                    onChange={e => setEggSettingProperty('ivFilterLower', e.target.value)}
+                    value={join(parseList(2, '/', ivFilterLower), '/')}
+                  />
+                </p>
+              </Col>
+              <Col>
+                {/* <p> */}
+                Gender: &nbsp;
+                      <RadioGroup
+                  value={genderFilter}
+                  onChange={e => setEggSettingProperty('genderFilter', e.target.value)}
+                >
+                  <Radio value={'Any'}>Any</Radio>
+                  <Radio value={'Male'}> Male </Radio>
+                  <Radio value={'Female'}> Female </Radio>
+                  <Radio value={'Genderless'}> Genderless </Radio>
+                </RadioGroup >
+                {/* </p> */}
+              </Col>
+              <Col>
+                Ability: &nbsp;
+                      <RadioGroup
+                  value={abilityFilter}
+                  onChange={e => setEggSettingProperty('abilityFilter', e.target.value)}
+                >
+                  <Radio value={'Any'}>Any</Radio>
+                  <Radio value={'1'}>1</Radio>
+                  <Radio value={'2'}>2</Radio>
+                  <Radio value={'H'}>H</Radio>
+                </RadioGroup >
+              </Col>
+              <Col>
+                <Checkbox
+                  checked={filterShinies}
+                  onChange={e => setEggSettingProperty('filterShinies', e.target.checked)}
+                >
+                  Filter shinies
+                    </Checkbox>
+              </Col>
+              <Col>
+                <Checkbox
+                  checked={applyFilters}
+                  onChange={e => setEggSettingProperty('applyFilters', e.target.checked)}
+                >
+                  Apply all filters
+                    </Checkbox>
+              </Col>
+
+
+            </Card>
+          </Col>
+        </Row>
+
+        <br />
         <Row type='flex' justify='center'>
           <Button type='primary' onClick={this.handleGenerateEggs}>
             RNGenerate!

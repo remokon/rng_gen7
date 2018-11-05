@@ -44,7 +44,7 @@ export const Results = ({ rngResults }) => {
   const columns = [
     {
       title: 'Frame',
-      dataIndex: 'frame',
+      dataIndex: 'frame'
     },
     {
       title: 'Adv',
@@ -80,28 +80,31 @@ export const Results = ({ rngResults }) => {
       dataIndex: 'egg.ivs.5',
     },
     {
-      title: 'Gender',
+      title: 'Gndr',
       dataIndex: 'egg.gender',
+      render: gender => gender === 'Female' ? '♀' : '♂'
     },
     {
       title: 'Ability',
       dataIndex: 'egg.ability',
     },
     {
-      title: 'Hidden Power',
+      title: 'HP Type',
       dataIndex: 'egg.ivs',
-      render: eggIvs => calcHP(eggIvs)
+      render: eggIvs => <img alt='' src={"https://www.serebii.net/pokedex-bw/type/" + `${calcHP(eggIvs)}`.toLowerCase() + ".gif"}/>
     },
     {
       title: 'Ball',
       dataIndex: 'egg.ball',
+      render: ball => ball === 'Female' ? 'F' : 'M'
+
     },
     {
       title: 'PSV',
       dataIndex: 'egg.psv',
     },
     {
-      title: 'Egg seeds',
+      title: <img alt='' src={"https://www.serebii.net/pokedex-sm/icon/102.png"}/>,
       dataIndex: 'eggSeeds',
       render: eggSeeds => join(map(reverse([...eggSeeds]), parseHexSeed), ', ')
     }

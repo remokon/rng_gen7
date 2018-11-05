@@ -22,14 +22,15 @@ export const store = createStore(
   reducers,
   {
     eggSettings: {
+      abilityFilter: 'Any',
       applyFilters: false,
       eggSeeds: ['E73ECADD', '547EBB26', '0A7862C1', 'E7415983'],
       femaleAbility: '1',
       femaleItem: 'None',
       femaleIVs: '31/31/31/31/31/31',
       filterShinies: false,
-      framesToGenerate: 4,
-      genderFilter: 'No Gender',
+      framesToGenerate: 10,
+      genderFilter: 'Any',
       genderRatio: '1:1',
       isFemaleDitto: false,
       ivFilterLower: '00/00/00/00/00/00',

@@ -29,7 +29,7 @@ class App extends Component {
         <Header>
           <div className="logo">7rng</div>
           <Menu mode="horizontal" defaultSelectedKeys={['1']} style={{ lineHeight: '64px' }}>
-            <Menu.Item key="1">Egg RNG</Menu.Item>
+            <Menu.Item key="1"> Egg RNG</Menu.Item>
             <Menu.Item key="2">Lorem ipsum</Menu.Item>
             <Menu.Item key="3">Lorem ipsum</Menu.Item>
           </Menu>
